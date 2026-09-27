@@ -250,7 +250,7 @@
                 </button>
             </div>
 
-            <div class="bg-white rounded-3xl p-6 shadow-md border border-slate-200 space-y-4">
+            <!-- <div class="bg-white rounded-3xl p-6 shadow-md border border-slate-200 space-y-4">
                 <div class="flex flex-col sm:flex-row items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200">
                     <span class="text-xs font-bold uppercase text-slate-600 flex items-center gap-1.5">
                         <i class="fa-solid fa-filter text-mbBlue"></i> Filter Data:
@@ -272,8 +272,50 @@
                             </select>
                         </div>
                     </div>
+                </div> -->
+                <!-- FILTER & REFRESH BAR -->
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                    <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+                        <span class="text-xs font-bold uppercase text-slate-600 flex items-center gap-1.5">
+                            <i class="fa-solid fa-filter text-mbBlue"></i> Filter Data:
+                        </span>
+
+                        <select id="admin-filter-angkatan" onchange="handleAdminAngkatanChange()" 
+                            class="bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 outline-none focus:border-mbBlue">
+                            <option value="All">Semua Angkatan / Status</option>
+                            <option value="X">Angkatan X</option>
+                            <option value="XI">Angkatan XI</option>
+                            <option value="XII">Angkatan XII</option>
+                            <option value="Guru">Guru / Staf</option>
+                        </select>
+
+                        <div id="container-admin-filter-kelas" class="hidden">
+                            <select id="admin-filter-kelas" onchange="fetchAdminTableData()" 
+                                class="bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 outline-none focus:border-mbBlue">
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Refresh Tabel -->
+                    <button onclick="fetchAdminTableData()" class="w-full sm:w-auto bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 px-4 py-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm active:scale-95">
+                        <i class="fa-solid fa-rotate-right text-mbBlue"></i> Refresh Tabel
+                    </button>
                 </div>
 
+                <!-- BOX INFO SISWA BELUM MEMILIH (Hanya muncul jika filter kelas spesifik dipilih) -->
+                <div id="container-unvoted-info" class="hidden bg-amber-50 border border-amber-200 rounded-2xl p-4 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-amber-900 flex items-center gap-2">
+                            <i class="fa-solid fa-user-clock text-amber-600 text-sm"></i> 
+                            Siswa Belum Memilih: <span id="unvoted-count" class="bg-amber-200 text-amber-900 px-2 py-0.5 rounded-full text-[11px] font-black">0</span>
+                        </span>
+                        <span id="unvoted-stat" class="text-[11px] text-amber-700 font-medium"></span>
+                    </div>
+                    <div id="unvoted-list" class="flex flex-wrap gap-1.5 pt-1">
+                        <!-- Name badges akan di-render otomatis via Javascript -->
+                    </div>
+                </div>
+          
                 <div class="overflow-x-auto rounded-2xl border border-slate-200">
                     <table class="w-full text-left border-collapse">
                         <thead>
@@ -666,7 +708,7 @@
             fetchAdminTableData();
         }
 
-        async function fetchAdminTableData() {
+        /* async function fetchAdminTableData() {
             const angkatan = document.getElementById('admin-filter-angkatan').value;
             const containerKelasVisible = !document.getElementById('container-admin-filter-kelas').classList.contains('hidden');
             const kelas = containerKelasVisible ? document.getElementById('admin-filter-kelas').value : 'All';
@@ -703,6 +745,77 @@
                 });
             } catch (err) {
                 tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-slate-400">Gagal terhubung ke database.</td></tr>';
+            }
+        } */
+        async function fetchAdminTableData() {
+            const angkatan = document.getElementById('admin-filter-angkatan').value;
+            const containerKelasVisible = !document.getElementById('container-admin-filter-kelas').classList.contains('hidden');
+            const kelas = containerKelasVisible ? document.getElementById('admin-filter-kelas').value : 'All';
+
+            const tbody = document.getElementById('admin-table-body');
+            const containerUnvoted = document.getElementById('container-unvoted-info');
+            tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-slate-400"><i class="fa-solid fa-spinner fa-spin mr-2"></i>Loading data...</td></tr>';
+
+            try {
+                const res = await fetch(`/api/admin/votes?angkatan=${angkatan}&kelas=${kelas}`);
+                const rows = await res.json();
+
+                tbody.innerHTML = '';
+                if (!rows || rows.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-slate-400">Tidak ada data ditemukan.</td></tr>';
+                } else {
+                    rows.forEach((row, index) => {
+                        const tr = document.createElement('tr');
+                        tr.className = "hover:bg-blue-50/50 transition border-b border-slate-100";
+                        tr.innerHTML = `
+                            <td class="p-4 text-slate-500 font-bold">${index + 1}</td>
+                            <td class="p-4 font-bold text-slate-900">${row.nama}</td>
+                            <td class="p-4 text-slate-700">${row.kelas}</td>
+                            <td class="p-4 text-slate-600">${row.angkatan}</td>
+                            <td class="p-4 text-center">
+                                <span class="px-2.5 py-1 rounded-full text-xs font-black ${row.pilih_nomor_berapa === 1 ? 'bg-blue-100 text-mbBlue' : 'bg-slate-900 text-white'}">
+                                    Paslon 0${row.pilih_nomor_berapa}
+                                </span>
+                            </td>
+                            <td class="p-4 text-slate-500 text-[11px] font-mono">${row.waktu_pemilihan}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                }
+
+                // CEK & TAMPILKAN DAFTAR SISWA YANG BELUM MEMILIH (Hanya jika filter kelas spesifik)
+                if (kelas !== 'All' && databaseMurid[kelas]) {
+                    const totalSiswaKelas = databaseMurid[kelas];
+                    const sudahMilihSet = new Set((rows || []).map(r => r.nama));
+                    const belumMilihList = totalSiswaKelas.filter(nama => !sudahMilihSet.has(nama));
+
+                    const unvotedListEl = document.getElementById('unvoted-list');
+                    const unvotedCountEl = document.getElementById('unvoted-count');
+                    const unvotedStatEl = document.getElementById('unvoted-stat');
+
+                    unvotedCountEl.textContent = `${belumMilihList.length} orang`;
+                    unvotedStatEl.textContent = `(${sudahMilihSet.size} dari ${totalSiswaKelas.length} siswa sudah memilih)`;
+                    unvotedListEl.innerHTML = '';
+
+                    if (belumMilihList.length === 0) {
+                        unvotedListEl.innerHTML = '<span class="text-xs text-emerald-700 font-bold flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Luar biasa! Semua siswa di kelas ini sudah menggunakan hak pilihnya.</span>';
+                    } else {
+                        belumMilihList.forEach(nama => {
+                            const badge = document.createElement('span');
+                            badge.className = "bg-white border border-amber-300 text-amber-900 px-2.5 py-1 rounded-lg text-xs font-medium shadow-sm flex items-center gap-1";
+                            badge.innerHTML = `<i class="fa-regular fa-clock text-[10px] text-amber-600"></i> ${nama}`;
+                            unvotedListEl.appendChild(badge);
+                        });
+                    }
+
+                    containerUnvoted.classList.remove('hidden');
+                } else {
+                    containerUnvoted.classList.add('hidden');
+                }
+
+            } catch (err) {
+                tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-slate-400">Gagal terhubung ke database.</td></tr>';
+                containerUnvoted.classList.add('hidden');
             }
         }
 
