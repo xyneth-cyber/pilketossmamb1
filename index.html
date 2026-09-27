@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Voting Pilketos SMA Mutiara Bangsa 1</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col justify-between">
+
+    <!-- NAVBAR -->
+    <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-40 shadow-lg">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-blue-600 text-white p-2 rounded-lg font-bold text-xl">MB1</div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight">Pilketos Online</h1>
+                    <p class="text-xs text-slate-400">SMA Mutiara Bangsa 1</p>
+                </div>
+            </div>
+            <div class="flex space-x-2">
+                <button onclick="openModal('modalStats'); loadPublicStats();" class="bg-slate-700 hover:bg-slate-600 text-sm px-3 py-2 rounded-lg border border-slate-600 transition">
+                    📊 Hasil Suara
+                </button>
+                <button onclick="openModal('modalAdminLogin')" class="bg-blue-600 hover:bg-blue-500 text-sm px-3 py-2 rounded-lg font-medium transition">
+                    🔒 Admin
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- KONTEN UTAMA: FORM PEMILIHAN -->
+    <main class="max-w-4xl mx-auto px-4 py-8 w-full flex-grow">
+        <div class="bg-slate-800 rounded-2xl p-6 md:p-8 border border-slate-700 shadow-xl">
+            <h2 class="text-2xl font-bold text-center mb-2">Formulir Suara Pemilih</h2>
+            <p class="text-slate-400 text-sm text-center mb-6">Silakan lengkapi data diri Anda sebelum memilih Calon Ketua OSIS.</p>
+
+            <form id="voteForm" onsubmit="handleVoteSubmit(event)" class="space-y-6">
+                <!-- DATA PEMILIH -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Nama Lengkap</label>
+                        <input type="text" id="inputNama" required list="listSiswa" placeholder="Ketik nama Anda..."
+                            class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 focus:outline-none focus:border-blue-500 text-slate-100">
+                        <datalist id="listSiswa"></datalist>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Kelas</label>
+                        <input type="text" id="inputKelas" required placeholder="Contoh: X-2, XI-IPA 1"
+                            class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 focus:outline-none focus:border-blue-500 text-slate-100">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Angkatan / Status</label>
+                        <select id="inputAngkatan" required
+                            class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 focus:outline-none focus:border-blue-500 text-slate-100">
+                            <option value="">-- Pilih Angkatan --</option>
+                            <option value="Kelas X">Kelas X</option>
+                            <option value="Kelas XI">Kelas XI</option>
+                            <option value="Kelas XII">Kelas XII</option>
+                            <option value="Guru / Staf">Guru / Staf</option>
+                        </select>
+                    </div>
+                </div>
+
+                <hr class="border-slate-700 my-6">
+
+                <!-- KANDIDAT PASLON -->
+                <h3 class="text-xl font-bold text-center mb-4">Pilih Pasangan Calon</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- PASLON 1 -->
+                    <label class="relative cursor-pointer group">
+                        <input type="radio" name="pilih_nomor_berapa" value="1" required class="peer sr-only">
+                        <div class="bg-slate-900 border-2 border-slate-700 rounded-xl p-5 transition peer-checked:border-blue-500 peer-checked:bg-blue-950/30 hover:border-slate-500 flex flex-col items-center text-center">
+                            <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center font-bold text-xl mb-3">01</div>
+                            <h4 class="font-bold text-lg">Kandidat Paslon 1</h4>
+                            <p class="text-xs text-slate-400 mt-1">Visi: Mewujudkan OSIS yang Aktif, Inovatif, dan Berintegritas Tinggi.</p>
+                        </div>
+                    </label>
+
+                    <!-- PASLON 2 -->
+                    <label class="relative cursor-pointer group">
+                        <input type="radio" name="pilih_nomor_berapa" value="2" required class="peer sr-only">
+                        <div class="bg-slate-900 border-2 border-slate-700 rounded-xl p-5 transition peer-checked:border-blue-500 peer-checked:bg-blue-950/30 hover:border-slate-500 flex flex-col items-center text-center">
+                            <div class="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center font-bold text-xl mb-3">02</div>
+                            <h4 class="font-bold text-lg">Kandidat Paslon 2</h4>
+                            <p class="text-xs text-slate-400 mt-1">Visi: Mendorong Kreativitas Siswa Melalui Program Ekstrakurikuler Unggulan.</p>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="pt-4">
+                    <button type="submit" id="btnSubmitVote" class="w-full bg-blue-600 hover:bg-blue-500 font-bold py-3.5 rounded-xl transition shadow-lg shadow-blue-600/30">
+                        Kirim Suara Sekarang
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 border-t border-slate-800 text-center py-4 text-xs text-slate-500">
+        &copy; 2026 E-Voting Pilketos SMA Mutiara Bangsa 1. Running on Cloudflare Pages & D1.
+    </footer>
+
+    <!-- MODAL 1: STATISTIK PUBLIC -->
+    <div id="modalStats" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl max-w-2xl w-full p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold">Hasil Suara Real-Time</h3>
+                <button onclick="closeModal('modalStats')" class="text-slate-400 hover:text-white font-bold text-xl">&times;</button>
+            </div>
+            <div class="w-full max-w-md mx-auto mb-6">
+                <canvas id="chartStats"></canvas>
+            </div>
+            <div id="statsDetail" class="text-sm text-slate-300 space-y-2"></div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: LOGIN ADMIN -->
+    <div id="modalAdminLogin" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl max-w-sm w-full p-6 shadow-2xl">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold">Login Admin</h3>
+                <button onclick="closeModal('modalAdminLogin')" class="text-slate-400 hover:text-white font-bold text-xl">&times;</button>
+            </div>
+            <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-300 mb-1">Username</label>
+                    <input type="text" id="adminUser" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-300 mb-1">Password</label>
+                    <input type="password" id="adminPass" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 py-2.5 rounded-lg font-bold text-sm">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 3: DASHBOARD TABEL ADMIN -->
+    <div id="modalAdminDashboard" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl max-w-5xl w-full p-6 shadow-2xl max-h-[90vh] flex flex-col">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold">Dashboard Admin - Data Suara</h3>
+                <button onclick="closeModal('modalAdminDashboard')" class="text-slate-400 hover:text-white font-bold text-xl">&times;</button>
+            </div>
+            
+            <!-- FILTER -->
+            <div class="flex flex-wrap gap-3 mb-4">
+                <select id="filterAngkatan" onchange="loadAdminVotes()" class="bg-slate-900 border border-slate-700 text-xs rounded-lg px-3 py-2 text-slate-100">
+                    <option value="All">Semua Angkatan</option>
+                    <option value="Kelas X">Kelas X</option>
+                    <option value="Kelas XI">Kelas XI</option>
+                    <option value="Kelas XII">Kelas XII</option>
+                    <option value="Guru / Staf">Guru / Staf</option>
+                </select>
+                <button onclick="loadAdminVotes()" class="bg-slate-700 hover:bg-slate-600 text-xs px-3 py-2 rounded-lg">Refresh</button>
+            </div>
+
+            <!-- TABEL SUARA -->
+            <div class="overflow-x-auto flex-grow border border-slate-700 rounded-xl">
+                <table class="w-full text-left text-sm text-slate-300">
+                    <thead class="bg-slate-900 text-xs uppercase text-slate-400 sticky top-0">
+                        <tr>
+                            <th class="p-3">ID</th>
+                            <th class="p-3">Nama</th>
+                            <th class="p-3">Kelas</th>
+                            <th class="p-3">Angkatan</th>
+                            <th class="p-3">Pilihan</th>
+                            <th class="p-3">Waktu Pemilihan</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableAdminVotes" class="divide-y divide-slate-700"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT INTEGRATION -->
+    <script>
+        let myChart = null;
+
+        // Load data.txt saat halaman dimuat
+        document.addEventListener("DOMContentLoaded", () => {
+            fetchDataTxt();
+        });
+
+        // 1. MEMBACA FILE DATA.TXT (Data Siswa Autocomplete)
+        async function fetchDataTxt() {
+            try {
+                const res = await fetch('data.txt');
+                if (res.ok) {
+                    const text = await res.text();
+                    const lines = text.split('\n');
+                    const datalist = document.getElementById('listSiswa');
+                    datalist.innerHTML = '';
+                    
+                    lines.forEach(line => {
+                        const nama = line.trim();
+                        if (nama) {
+                            const opt = document.createElement('option');
+                            opt.value = nama;
+                            datalist.appendChild(opt);
+                        }
+                    });
+                }
+            } catch (err) {
+                console.log("File data.txt tidak ditemukan atau kosong.");
+            }
+        }
+
+        // 2. MODAL HELPER
+        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+        // 3. KIRIM SUARA KE BACKEND (/api/vote)
+        async function handleVoteSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnSubmitVote');
+            btn.disabled = true;
+            btn.innerText = "Mengirim Suara...";
+
+            const selectedOption = document.querySelector('input[name="pilih_nomor_berapa"]:checked');
+
+            const payload = {
+                nama: document.getElementById('inputNama').value.trim(),
+                kelas: document.getElementById('inputKelas').value.trim(),
+                angkatan: document.getElementById('inputAngkatan').value,
+                pilih_nomor_berapa: parseInt(selectedOption.value)
+            };
+
+            try {
+                const res = await fetch('/api/vote', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+
+                if (res.ok && data.success) {
+                    alert('✅ ' + data.message);
+                    document.getElementById('voteForm').reset();
+                } else {
+                    alert('⚠️ ' + (data.message || 'Gagal menyimpan suara.'));
+                }
+            } catch (err) {
+                alert('❌ Gagal terhubung ke server.');
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Kirim Suara Sekarang";
+            }
+        }
+
+        // 4. MEMUTATSI GRAFIK HASIL SUARA PUBLIC (/api/stats/public)
+        async function loadPublicStats() {
+            try {
+                const res = await fetch('/api/stats/public');
+                const data = await res.json();
+
+                let total1 = 0, total2 = 0;
+                if (data.total) {
+                    data.total.forEach(row => {
+                        if (row.pilih_nomor_berapa === 1) total1 = row.total;
+                        if (row.pilih_nomor_berapa === 2) total2 = row.total;
+                    });
+                }
+
+                // Render Chart.js
+                const ctx = document.getElementById('chartStats').getContext('2d');
+                if (myChart) myChart.destroy();
+
+                myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Paslon 01', 'Paslon 02'],
+                        datasets: [{
+                            data: [total1, total2],
+                            backgroundColor: ['#2563eb', '#10b981'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { labels: { color: '#f8fafc' } }
+                        }
+                    }
+                });
+
+                document.getElementById('statsDetail').innerHTML = `
+                    <p>Total Perolehan Suara Paslon 01: <b>${total1}</b></p>
+                    <p>Total Perolehan Suara Paslon 02: <b>${total2}</b></p>
+                    <p>Total Keseluruhan Suara Masuk: <b>${total1 + total2}</b></p>
+                `;
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        // 5. LOGIN ADMIN (/api/admin/login)
+        async function handleAdminLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('adminUser').value;
+            const password = document.getElementById('adminPass').value;
+
+            try {
+                const res = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                const data = await res.json();
+
+                if (res.ok && data.success) {
+                    closeModal('modalAdminLogin');
+                    openModal('modalAdminDashboard');
+                    loadAdminVotes();
+                } else {
+                    alert('❌ ' + (data.message || 'Login Gagal!'));
+                }
+            } catch (err) {
+                alert('❌ Terjadi kesalahan sistem.');
+            }
+        }
+
+        // 6. AMBIL TABEL VOE ADMIN (/api/admin/votes)
+        async function loadAdminVotes() {
+            const angkatan = document.getElementById('filterAngkatan').value;
+            try {
+                const res = await fetch(`/api/admin/votes?angkatan=${encodeURIComponent(angkatan)}`);
+                const rows = await res.json();
+
+                const tbody = document.getElementById('tableAdminVotes');
+                tbody.innerHTML = '';
+
+                if (rows.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-500">Belum ada data suara masuk.</td></tr>`;
+                    return;
+                }
+
+                rows.forEach(r => {
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-slate-700/50 transition";
+                    tr.innerHTML = `
+                        <td class="p-3 font-mono text-xs text-slate-400">${r.id}</td>
+                        <td class="p-3 font-medium text-slate-100">${r.nama}</td>
+                        <td class="p-3">${r.kelas}</td>
+                        <td class="p-3 text-slate-400">${r.angkatan}</td>
+                        <td class="p-3"><span class="px-2 py-1 bg-slate-700 font-bold rounded text-xs">${r.pilih_nomor_berapa === 1 ? '01' : '02'}</span></td>
+                        <td class="p-3 text-xs text-slate-400">${r.waktu_pemilihan}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    </script>
+</body>
+</html>
