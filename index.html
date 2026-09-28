@@ -379,6 +379,34 @@
         </div>
     </div>
 
+      <!-- MODAL KONFIRMASI DUAL VERIFIKASI -->
+    <div id="modal-confirm-vote" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center space-y-4 shadow-2xl border border-slate-100">
+            <div class="w-16 h-16 bg-blue-50 text-mbBlue rounded-2xl flex items-center justify-center text-2xl mx-auto border border-blue-200">
+                <i class="fa-solid fa-circle-question text-mbBlue"></i>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-slate-900 title-polo">Konfirmasi Pilihan</h3>
+                <p class="text-slate-500 text-xs mt-1">Apakah Anda yakin ingin memilih pasangan calon ini? Pilihan **tidak dapat diubah** setelah dikonfirmasi.</p>
+            </div>
+            
+            <!-- Information Box Paslon Dipilih -->
+            <div class="bg-slate-50 border border-slate-200 p-3 rounded-2xl text-left">
+                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Pilihan Anda:</p>
+                <p id="confirm-paslon-title" class="text-sm font-bold text-mbBlueDark mt-0.5">-</p>
+            </div>
+
+            <div class="flex gap-3 pt-2">
+                <button type="button" onclick="closeConfirmModal()" class="w-1/2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 rounded-xl text-xs transition">
+                    Batal
+                </button>
+                <button type="button" onclick="confirmCoblos()" id="btn-submit-vote" class="w-1/2 bg-mbBlue hover:bg-blue-700 text-white font-bold py-3 rounded-xl text-xs shadow-md shadow-blue-500/20 transition flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-check"></i> Ya, Yakin
+                </button>
+            </div>
+        </div>
+    </div>
+  
     <!-- MODAL POPUP NOTIFIKASI -->
     <div id="modal-alert" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl p-6 max-w-xs w-full text-center space-y-3 shadow-2xl">
@@ -524,7 +552,7 @@
         }
 
         // Aksi Coblos (Kirim Suara ke Cloudflare Workers D1 Backend API)
-        async function coblos(paslonNum) {
+        /*async function coblos(paslonNum) {
             try {
                 const response = await fetch('/api/vote', {
                     method: 'POST',
@@ -556,8 +584,73 @@
             } catch (err) {
                 showAlertModal("Gagal Connection", "Gagal terhubung ke backend server.", "danger");
             }
+        }*/
+        let selectedPaslon = null;
+
+        // Nama Paslon untuk ditampilkan di popup konfirmasi
+        const paslonNames = {
+            1: "PASLON 01 - Ahmad Fauzi & Siti Rahma",
+            2: "PASLON 02 - Budi Santoso & Dewi Lestari"
+        };
+
+        // Step 1: Buka Modal Konfirmasi (Belum Kirim ke Server)
+        function coblos(paslonNum) {
+            selectedPaslon = paslonNum;
+            document.getElementById('confirm-paslon-title').textContent = paslonNames[paslonNum] || `Paslon 0${paslonNum}`;
+            document.getElementById('modal-confirm-vote').classList.remove('hidden');
         }
 
+        function closeConfirmModal() {
+            document.getElementById('modal-confirm-vote').classList.add('hidden');
+            selectedPaslon = null;
+        }
+
+        // Step 2: Kirim Suara ke Backend setelah User Klik "Ya, Yakin"
+        async function confirmCoblos() {
+            if (!selectedPaslon) return;
+
+            const btnSubmit = document.getElementById('btn-submit-vote');
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Memproses...';
+
+            closeConfirmModal();
+
+            try {
+                const response = await fetch('/api/vote', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        nama: voterData.nama,
+                        angkatan: voterData.angkatan,
+                        kelas: voterData.kelas,
+                        pilih_nomor_berapa: selectedPaslon
+                    })
+                });
+
+                const res = await response.json();
+                if (res.success) {
+                    showAlertModal("Berhasil!", `Terima kasih ${voterData.nama}, suara Anda untuk Paslon 0${selectedPaslon} telah tersimpan!`, "success");
+                    
+                    document.getElementById('voter-nama').value = '';
+                    document.getElementById('voter-angkatan').value = '';
+                    document.getElementById('voter-kelas').value = '';
+                    voterData = { nama: '', angkatan: '', kelas: '' };
+                    
+                    setTimeout(() => {
+                        closeAlertModal();
+                        switchTab('voting');
+                    }, 2000);
+                } else {
+                    showAlertModal("Gagal", res.message || "Gagal menyimpan suara.", "danger");
+                }
+            } catch (err) {
+                showAlertModal("Gagal Connection", "Gagal terhubung ke backend server.", "danger");
+            } finally {
+                btnSubmit.disabled = false;
+                btnSubmit.innerHTML = '<i class="fa-solid fa-check"></i> Ya, Yakin';
+            }
+        }
+          
         // Render Statistik Publik (Pie Chart & Horizontal Bar Chart)
         async function loadPublicStats() {
             let totalData = [0, 0];
