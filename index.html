@@ -79,7 +79,27 @@
 
     <!-- MAIN CONTENT -->
     <main class="flex-1 max-w-5xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+        <!-- OVERLAY DEVICE LOCK LOKASI -->
+<div id="location-lock-overlay" class="fixed inset-0 bg-slate-900/90 backdrop-blur-md z-[100] flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center space-y-4 shadow-2xl border border-slate-100">
+        <div id="location-icon-box" class="w-16 h-16 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center text-2xl mx-auto border border-amber-200">
+            <i class="fa-solid fa-location-dot"></i>
+        </div>
+        <div>
+            <h3 class="text-lg font-bold text-slate-900 title-polo">Verifikasi Lokasi Pemilihan</h3>
+            <p id="location-status" class="text-slate-500 text-xs mt-1">Sistem ini dikunci khusus untuk pemilih di dalam area lokasi sekolah/bilik suara.</p>
+        </div>
+        
+        <div id="location-detail-box" class="hidden bg-slate-50 border border-slate-200 p-3 rounded-2xl text-xs text-slate-600 font-mono">
+            Jarak Anda saat ini: <span id="current-distance" class="font-bold text-slate-900">0</span> meter
+        </div>
 
+        <button type="button" id="btn-check-location" onclick="checkLocationLock()" class="w-full bg-mbBlue hover:bg-blue-700 text-white font-bold py-3 rounded-xl text-xs shadow-md shadow-blue-500/20 transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-crosshairs"></i> Cek Lokasi Saya
+        </button>
+    </div>
+</div>
+      
         <!-- STEP 1: VERIFIKASI PEMILIH -->
         <section id="step-login" class="space-y-6">
             <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-blue-100 max-w-xl mx-auto">
@@ -421,6 +441,85 @@
 
     <!-- JAVASCRIPT APP LOGIC -->
     <script>
+      // ==================== CONFIG LOKASI TESTING ====================
+// Ganti lat/lng di bawah dengan koordinat titik lokasi testing kamu
+const TARGET_LAT = -6.180000;  // Contoh Latitude
+const TARGET_LNG = 106.630000; // Contoh Longitude
+const MAX_RADIUS_METERS = 100; // Batas radius aman dalam meter (misal: 100 meter)
+
+// Formula Haversine untuk menghitung jarak antara 2 koordinat (dalam meter)
+function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371000; // Radius Bumi dalam meter
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = 
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return Math.round(R * c);
+}
+
+function checkLocationLock() {
+    const statusEl = document.getElementById('location-status');
+    const btnEl = document.getElementById('btn-check-location');
+    const detailBox = document.getElementById('location-detail-box');
+    const distEl = document.getElementById('current-distance');
+    const iconBox = document.getElementById('location-icon-box');
+
+    if (!navigator.geolocation) {
+        statusEl.textContent = "Browser Anda tidak mendukung fitur lokasi (Geolocation).";
+        return;
+    }
+
+    btnEl.disabled = true;
+    btnEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Memeriksa Lokasi...';
+
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+            const userLat = position.coords.latitude;
+            const userLng = position.coords.longitude;
+            const distance = calculateDistance(userLat, userLng, TARGET_LAT, TARGET_LNG);
+
+            detailBox.classList.remove('hidden');
+            distEl.textContent = distance;
+
+            if (distance <= MAX_RADIUS_METERS) {
+                // DIDALAM RADIUS -> UNLOCK
+                statusEl.textContent = "Lokasi terverifikasi! Mengalihkan ke aplikasi...";
+                statusEl.className = "text-emerald-600 text-xs mt-1 font-bold";
+                iconBox.className = "w-16 h-16 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center text-2xl mx-auto border border-emerald-200";
+                
+                setTimeout(() => {
+                    document.getElementById('location-lock-overlay').classList.add('hidden');
+                }, 1000);
+            } else {
+                // DILUAR RADIUS -> BLOKIR
+                statusEl.textContent = `Akses Ditolak. Anda berada ${distance}m dari lokasi (Maksimal ${MAX_RADIUS_METERS}m).`;
+                statusEl.className = "text-rose-600 text-xs mt-1 font-bold";
+                iconBox.className = "w-16 h-16 bg-rose-50 text-rose-600 rounded-2xl flex items-center justify-center text-2xl mx-auto border border-rose-200";
+                btnEl.disabled = false;
+                btnEl.innerHTML = '<i class="fa-solid fa-rotate-right"></i> Coba Cek Lagi';
+            }
+        },
+        (error) => {
+            btnEl.disabled = false;
+            btnEl.innerHTML = '<i class="fa-solid fa-crosshairs"></i> Cek Lokasi Saya';
+            if (error.code === error.PERMISSION_DENIED) {
+                statusEl.textContent = "Izin lokasi ditolak! Izinkan akses GPS/Lokasi pada browser HP Anda.";
+            } else {
+                statusEl.textContent = "Gagal membaca GPS. Pastikan GPS HP Anda sudah aktif.";
+            }
+        },
+        { enableHighAccuracy: true, timeout: 8000 }
+    );
+}
+
+// Otomatis cek lokasi saat web dibuka
+document.addEventListener("DOMContentLoaded", () => {
+    checkLocationLock();
+});
+                           
         let voterData = { nama: '', angkatan: '', kelas: '' };
         let databaseMurid = {};
         let logoClickCount = 0;
