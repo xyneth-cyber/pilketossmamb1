@@ -97,6 +97,10 @@
         <button type="button" id="btn-check-location" onclick="checkLocationLock()" class="w-full bg-mbBlue hover:bg-blue-700 text-white font-bold py-3 rounded-xl text-xs shadow-md shadow-blue-500/20 transition flex items-center justify-center gap-2">
             <i class="fa-solid fa-crosshairs"></i> Cek Lokasi Saya
         </button>
+      <!-- Tambahkan di bawah tombol 'Cek Lokasi Saya' -->
+<button type="button" onclick="unlockWithAdminPin()" class="w-full mt-2 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold py-2.5 rounded-xl text-xs transition">
+    <i class="fa-solid fa-key"></i> Buka via PIN Panitia (Khusus TV/Laptop Sekolah)
+</button>
     </div>
 </div>
       
@@ -519,7 +523,18 @@ function checkLocationLock() {
 document.addEventListener("DOMContentLoaded", () => {
     checkLocationLock();
 });
-                           
+
+      function unlockWithAdminPin() {
+    const pin = prompt("Masukkan PIN Master Panitia untuk membuka TV ini:");
+    // Ganti '123456' dengan PIN rahasia panitia
+    if (pin === "123456") { 
+        document.getElementById('location-lock-overlay').classList.add('hidden');
+        alert("Mode Kiosk TV Berhasil Diaktifkan!");
+    } else if (pin !== null) {
+        alert("PIN Salah!");
+    }
+      }
+      
         let voterData = { nama: '', angkatan: '', kelas: '' };
         let databaseMurid = {};
         let logoClickCount = 0;
