@@ -627,24 +627,24 @@
 
         // Step 1: Buka Modal Konfirmasi (Belum Kirim ke Server)
         function coblos(paslonNum) {
-            selectedPaslon = paslonNum;
+            const selectedPaslon = paslonNum;
             document.getElementById('confirm-paslon-title').textContent = paslonNames[paslonNum] || `Paslon 0${paslonNum}`;
             document.getElementById('modal-confirm-vote').classList.remove('hidden');
         }
 
         function closeConfirmModal() {
             document.getElementById('modal-confirm-vote').classList.add('hidden');
-            selectedPaslon = null;
+            const selectedPaslon = null;
         }
 
         // Step 2: Kirim Suara ke Backend setelah User Klik "Ya, Yakin"
         async function confirmCoblos() {
             if (!selectedPaslon) return;
-            const chosenPaslon = Number(selectedPaslon);
-            alert (selectedPaslon);
-            alert (voterData.nama);
-            alert (voterData.angkatan);
-            alert (voterData.kelas);
+            // const chosenPaslon = Number(selectedPaslon);
+            // alert (selectedPaslon);
+            // alert (voterData.nama);
+            // alert (voterData.angkatan);
+            // alert (voterData.kelas);
             console.log("Data dikirim:", {
                 nama: voterData.nama,
                 angkatan: voterData.angkatan,
