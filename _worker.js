@@ -152,42 +152,46 @@ export default {
 
         // 1. API SIMPAN SUARA (/api/vote)
         if (path === "/api/vote" && method === "POST") {
-            try {
-                const body = await request.json();
-                const { nama, kelas, angkatan, pilih_nomor_berapa } = body;
+    try {
+        const body = await request.json().catch(() => ({}));
+        const { nama, kelas, angkatan, pilih_nomor_berapa } = body;
 
-                // Log untuk memantau data yang masuk di Cloudflare Logs
-                console.log("Payload Masuk:", body);
+        // Periksa field mana yang hilang/kosong
+        const missing = [];
+        if (!nama) missing.push("nama");
+        if (!kelas) missing.push("kelas");
+        if (!angkatan) missing.push("angkatan");
+        if (!pilih_nomor_berapa) missing.push("pilih_nomor_berapa");
 
-                if (!nama || !kelas || !angkatan || !pilih_nomor_berapa) {
-                    return jsonResponse({ 
-                        success: false, 
-                        message: 'Data wajib diisi! Pastikan nama, kelas, angkatan, dan paslon terisi.' 
-                    }, 400);
-                }
-
-                // Cek apakah nama dan kelas sudah pernah coblos
-                const existing = await env.DB.prepare(
-                    `SELECT id FROM voting_results WHERE nama = ? AND kelas = ?`
-                ).bind(nama, kelas).first();
-
-                if (existing) {
-                    return jsonResponse({ 
-                        success: false, 
-                        message: 'Nama Anda sudah terdaftar menggunakan hak suara!' 
-                    }, 400);
-                }
-
-                // Simpan suara ke database
-                await env.DB.prepare(
-                    `INSERT INTO voting_results (nama, kelas, angkatan, pilih_nomor_berapa) VALUES (?, ?, ?, ?)`
-                ).bind(nama, kelas, angkatan, Number(pilih_nomor_berapa)).run();
-
-                return jsonResponse({ success: true, message: 'Suara Anda berhasil disimpan!' });
-            } catch (err) {
-                return jsonResponse({ success: false, message: err.message }, 500);
-            }
+        if (missing.length > 0) {
+            return jsonResponse({ 
+                success: false, 
+                message: `Data tidak terbaca di server. Field kosong: ${missing.join(", ")}` 
+            }, 400);
         }
+
+        // Cek apakah nama dan kelas sudah pernah coblos
+        const existing = await env.DB.prepare(
+            `SELECT id FROM voting_results WHERE nama = ? AND kelas = ?`
+        ).bind(nama, kelas).first();
+
+        if (existing) {
+            return jsonResponse({ 
+                success: false, 
+                message: 'Nama Anda sudah terdaftar menggunakan hak suara!' 
+            }, 400);
+        }
+
+        // Simpan suara ke database D1
+        await env.DB.prepare(
+            `INSERT INTO voting_results (nama, kelas, angkatan, pilih_nomor_berapa) VALUES (?, ?, ?, ?)`
+        ).bind(nama, kelas, angkatan, Number(pilih_nomor_berapa)).run();
+
+        return jsonResponse({ success: true, message: 'Suara Anda berhasil disimpan!' });
+    } catch (err) {
+        return jsonResponse({ success: false, message: err.message }, 500);
+    }
+}
 
         // 2. API LOGIN ADMIN (/api/admin/login)
         if (path === "/api/admin/login" && method === "POST") {
