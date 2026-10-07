@@ -151,7 +151,7 @@
                 <p class="text-slate-500 text-xs mt-1">Tentukan masa depan OSIS SMA Mutiara Bangsa 1 dengan pilihan terbaik Anda.</p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
                 <!-- PASLON 01 -->
                 <div class="bg-white rounded-3xl overflow-hidden border-2 border-blue-100 hover:border-mbBlue transition duration-300 shadow-lg flex flex-col justify-between">
                     <div>
@@ -568,7 +568,8 @@
                 return;
             }
 
-            document.getElementById('display-voter-info').textContent = `${voterData.nama} (${voterData.kelas} - ${voterData.angkatan})`;
+            // document.getElementById('display-voter-info').textContent = `${voterData.nama} (${voterData.kelas} ~ ${voterData.angkatan})`;
+            document.getElementById('display-voter-info').textContent = `${voterData.nama} (${voterData.kelas})`;
             document.getElementById('step-login').classList.add('hidden');
             document.getElementById('step-candidates').classList.remove('hidden');
         }
