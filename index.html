@@ -1,4 +1,4 @@
-                <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -81,7 +81,7 @@
     <main class="flex-1 max-w-5xl w-full mx-auto p-4 sm:p-6 lg:p-8">
 
         <!-- STEP 1: VERIFIKASI PEMILIH -->
-        <section id="step-login" class="space-y-6">
+        <!-- <section id="step-login" class="space-y-6">
             <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-blue-100 max-w-xl mx-auto">
                 <div class="text-center mb-8">
                     <div class="w-16 h-16 bg-blue-50 text-mbBlue rounded-2xl flex items-center justify-center text-2xl mx-auto mb-3 border border-blue-200">
@@ -91,9 +91,9 @@
                     <p class="text-slate-500 text-xs mt-1">Silakan masukkan data diri Anda sebelum melangkah ke bilik suara.</p>
                 </div>
 
-                <form onsubmit="handleNextStep(event)" class="space-y-5">
+                <form onsubmit="handleNextStep(event)" class="space-y-5"> -->
                     <!-- Dropdown 1: Angkatan / Status -->
-                    <div>
+                    <!-- <div>
                         <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Angkatan / Status</label>
                         <select id="voter-angkatan" onchange="handleAngkatanFormChange()" required 
                             class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl font-medium focus:border-mbBlue focus:ring-2 focus:ring-blue-100 outline-none transition text-sm">
@@ -103,19 +103,19 @@
                             <option value="XII">Kelas XII</option>
                             <option value="Guru">Guru / Staf Pengajar</option>
                         </select>
-                    </div>
+                    </div> -->
 
                     <!-- Dropdown 2: Kelas (Dinamis) -->
-                    <div id="container-voter-kelas">
+                    <!-- <div id="container-voter-kelas">
                         <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Pilih Kelas</label>
                         <select id="voter-kelas" required 
                             class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl font-medium focus:border-mbBlue focus:ring-2 focus:ring-blue-100 outline-none transition text-sm">
                             <option value="">-- Pilih Angkatan Terlebih Dahulu --</option>
                         </select>
-                    </div>
+                    </div>-->
 
                     <!-- Dropdown 3: Nama Pemilih (Dinamis) -->
-                    <div>
+                    <!-- <div>
                         <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Nama Lengkap</label>
                         <select id="voter-nama" required  
                             class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl focus:border-mbBlue focus:ring-2 focus:ring-blue-100 outline-none transition text-sm">
@@ -128,10 +128,10 @@
                     </button>
                 </form>
             </div>
-        </section>
+        </section>-->
 
         <!-- STEP 2: PILIH CALON KETUA OSIS -->
-        <section id="step-candidates" class="hidden space-y-6">
+        <!--<section id="step-candidates" class="hidden space-y-6">
             <div class="bg-blue-50 border border-blue-200 text-mbBlueDark p-4 rounded-2xl flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     <i class="fa-solid fa-user-check text-xl text-mbBlue"></i>
@@ -150,9 +150,9 @@
                 <p class="text-slate-500 text-xs mt-1">Tentukan masa depan OSIS SMA Mutiara Bangsa 1 dengan pilihan terbaik Anda.</p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto"> -->
                 <!-- PASLON 01 -->
-                <div class="bg-white rounded-3xl overflow-hidden border-2 border-blue-100 hover:border-mbBlue transition duration-300 shadow-lg flex flex-col justify-between">
+                <!-- <div class="bg-white rounded-3xl overflow-hidden border-2 border-blue-100 hover:border-mbBlue transition duration-300 shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="bg-mbBlue p-4 text-white text-center">
                             <span class="bg-white text-mbBlue font-black text-xs px-3 py-1 rounded-full uppercase tracking-wider inline-block">
@@ -176,10 +176,10 @@
                             <i class="fa-solid fa-check-circle"></i> COBLOS PASLON 01
                         </button>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- PASLON 02 -->
-                <div class="bg-white rounded-3xl overflow-hidden border-2 border-blue-100 hover:border-mbBlue transition duration-300 shadow-lg flex flex-col justify-between">
+                <!-- <div class="bg-white rounded-3xl overflow-hidden border-2 border-blue-100 hover:border-mbBlue transition duration-300 shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="bg-mbBlueDark p-4 text-white text-center">
                             <span class="bg-white text-mbBlueDark font-black text-xs px-3 py-1 rounded-full uppercase tracking-wider inline-block">
@@ -205,7 +205,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <!-- PUBLIC STATISTICAL CHARTS -->
         <section id="section-stats" class="hidden space-y-8">
@@ -224,19 +224,12 @@
                             <canvas id="chart-overall-pie"></canvas>
                         </div>
                     </div>
-
-                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 flex flex-col items-center">
-                        <h3 class="font-bold text-slate-800 text-sm mb-4 text-center">📊 Perolehan Suara Per Angkatan / Kategori</h3>
-                        <div class="w-full h-64 relative flex items-center justify-center">
-                            <canvas id="chart-angkatan-bar"></canvas>
-                        </div>
-                    </div>
-                </div>
+                  </div>
             </div>
         </section>
 
         <!-- ADMIN DASHBOARD -->
-        <section id="section-admin-dashboard" class="hidden space-y-6">
+        <!-- <section id="section-admin-dashboard" class="hidden space-y-6">
             <div class="bg-mbBlueDark text-white rounded-3xl p-6 sm:p-8 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
                     <span class="bg-blue-400 text-slate-950 font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">
@@ -248,7 +241,7 @@
                 <button onclick="adminLogout()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition shadow">
                     <i class="fa-solid fa-sign-out-alt"></i> Logout Admin
                 </button>
-            </div>
+            </div>-->
 
             <!-- <div class="bg-white rounded-3xl p-6 shadow-md border border-slate-200 space-y-4">
                 <div class="flex flex-col sm:flex-row items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200">
@@ -274,7 +267,7 @@
                     </div>
                 </div> -->
                 <!-- FILTER & REFRESH BAR -->
-                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                <!--<div class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200">
                     <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
                         <span class="text-xs font-bold uppercase text-slate-600 flex items-center gap-1.5">
                             <i class="fa-solid fa-filter text-mbBlue"></i> Filter Data:
@@ -294,16 +287,16 @@
                                 class="bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 outline-none focus:border-mbBlue">
                             </select>
                         </div>
-                    </div>
+                    </div>-->
 
                     <!-- Tombol Refresh Tabel -->
-                    <button onclick="fetchAdminTableData()" class="w-full sm:w-auto bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 px-4 py-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm active:scale-95">
+                    <!--<button onclick="fetchAdminTableData()" class="w-full sm:w-auto bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 px-4 py-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm active:scale-95">
                         <i class="fa-solid fa-rotate-right text-mbBlue"></i> Refresh Tabel
                     </button>
-                </div>
+                </div>-->
 
                 <!-- BOX INFO SISWA BELUM MEMILIH (Hanya muncul jika filter kelas spesifik dipilih) -->
-                <div id="container-unvoted-info" class="hidden bg-amber-50 border border-amber-200 rounded-2xl p-4 space-y-2">
+                <!--<div id="container-unvoted-info" class="hidden bg-amber-50 border border-amber-200 rounded-2xl p-4 space-y-2">
                     <div class="flex items-center justify-between">
                         <span class="text-xs font-bold text-amber-900 flex items-center gap-2">
                             <i class="fa-solid fa-user-clock text-amber-600 text-sm"></i> 
@@ -311,9 +304,9 @@
                         </span>
                         <span id="unvoted-stat" class="text-[11px] text-amber-700 font-medium"></span>
                     </div>
-                    <div id="unvoted-list" class="flex flex-wrap gap-1.5 pt-1">
+                    <div id="unvoted-list" class="flex flex-wrap gap-1.5 pt-1">-->
                         <!-- Name badges akan di-render otomatis via Javascript -->
-                    </div>
+                    <!--</div>
                 </div>
           
                 <div class="overflow-x-auto rounded-2xl border border-slate-200">
@@ -333,7 +326,7 @@
                     </table>
                 </div>
             </div>
-        </section>
+        </section> -->
 
     </main>
 
@@ -341,9 +334,9 @@
     <footer class="bg-mbBlueDark text-blue-200 py-6 border-t border-blue-900 text-center text-xs mt-auto">
         <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
             <p>© SMA Mutiara Bangsa 1 - Pilketos Digital System</p>
-            <button onclick="openAdminModal()" class="text-blue-400 hover:text-white transition text-xs flex items-center gap-1 opacity-60 hover:opacity-100">
+            <<!-- button onclick="openAdminModal()" class="text-blue-400 hover:text-white transition text-xs flex items-center gap-1 opacity-60 hover:opacity-100">
                 <i class="fa-solid fa-lock text-[10px]"></i> Admin
-            </button>
+            </button> -->
         </div>
     </footer>
 
@@ -433,6 +426,7 @@
             if (window.location.hash === '#admin') {
                 openAdminModal();
             }
+            switchTab('stats')
         });
 
         // 1. Fungsi Membaca file data.txt
