@@ -35,6 +35,7 @@ export default {
         if (path === "/api/vote" && method === "POST") {
             try {
                 const { nama, kelas, angkatan, pilih_nomor_berapa } = await request.json();
+                console.log("Nama:", nama, "Kelas:", kelas, "angkatan:", angkatan, "Paslon:", pilih_nomor_berapa);
 
                 if (!nama || !kelas || !angkatan || !pilih_nomor_berapa) {
                     return jsonResponse({ success: false, message: 'Data wajib diisi!' }, 400);
