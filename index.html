@@ -640,6 +640,7 @@
         // Step 2: Kirim Suara ke Backend setelah User Klik "Ya, Yakin"
         async function confirmCoblos() {
             if (!selectedPaslon) return;
+            alert (`selectedPaslon`);
 
             const btnSubmit = document.getElementById('btn-submit-vote');
             btnSubmit.disabled = true;
