@@ -36,7 +36,7 @@ export default {
             try {
                 const { nama, kelas, angkatan, pilih_nomor_berapa } = await request.json();
 
-                if (!nama || !kelas || !pilih_nomor_berapa) {
+                if (!nama || !kelas || !angkatan || !pilih_nomor_berapa) {
                     return jsonResponse({ success: false, message: 'Data wajib diisi!' }, 400);
                 }
 
