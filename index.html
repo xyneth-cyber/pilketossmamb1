@@ -537,7 +537,7 @@
         });
 
         // Navigation Tabs
-        function switchTab(tab) {
+        /*function switchTab(tab) {
             document.getElementById('step-login').classList.add('hidden');
             document.getElementById('step-candidates').classList.add('hidden');
             document.getElementById('section-stats').classList.add('hidden');
@@ -558,7 +558,7 @@
                 document.getElementById('section-stats').classList.remove('hidden');
                 loadPublicStats();
             }
-        }
+        }*/
 
         function handleNextStep(e) {
             e.preventDefault();
@@ -571,8 +571,8 @@
                 return;
             }
 
-            document.getElementById('display-voter-info').textContent = `${voterData.nama} (${voterData.kelas} ~ ${voterData.angkatan})`;
-            // document.getElementById('display-voter-info').textContent = `${voterData.nama} (${voterData.kelas})`;
+            // document.getElementById('display-voter-info').textContent = `${voterData.nama} (${voterData.kelas} ~ ${voterData.angkatan})`;
+            document.getElementById('display-voter-info').textContent = `${voterData.nama} (${voterData.kelas})`;
             document.getElementById('step-login').classList.add('hidden');
             document.getElementById('step-candidates').classList.remove('hidden');
         }
@@ -627,7 +627,7 @@
 
         // Step 1: Buka Modal Konfirmasi (Belum Kirim ke Server)
         function coblos(paslonNum) {
-            const selectedPaslon = paslonNum;
+            selectedPaslon = paslonNum;
             document.getElementById('confirm-paslon-title').textContent = paslonNames[paslonNum] || `Paslon 0${paslonNum}`;
             document.getElementById('modal-confirm-vote').classList.remove('hidden');
         }
@@ -640,7 +640,7 @@
         // Step 2: Kirim Suara ke Backend setelah User Klik "Ya, Yakin"
         async function confirmCoblos() {
             if (!selectedPaslon) return;
-            // const chosenPaslon = Number(selectedPaslon);
+            const chosenPaslon = Number(selectedPaslon);
             // alert (selectedPaslon);
             // alert (voterData.nama);
             // alert (voterData.angkatan);
