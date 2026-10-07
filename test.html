@@ -17,11 +17,11 @@
             theme: {
                 extend: {
                     colors: {
-                        mbBlue: '#1d4ed8',      /* Biru Utama Sekolah */
-                        mbBlueDark: '#1e3a8a',  /* Biru Tua Navbar/Footer */
-                        mbBlueLight: '#3b82f6', /* Biru Accent */
-                        mbSky: '#dbeafe',       /* Biru Muda Accent */
-                        mbBg: '#f8fafc'         /* Background */
+                        mbBlue: '#1d4ed8',      
+                        mbBlueDark: '#1e3a8a',  
+                        mbBlueLight: '#3b82f6', 
+                        mbSky: '#dbeafe',       
+                        mbBg: '#f8fafc'         
                     }
                 }
             }
@@ -53,10 +53,7 @@
             <div class="flex items-center justify-between h-20">
                 <!-- Logo Sekolah (Klik 3x untuk buka Login Admin Rahasia) -->
                 <div class="flex items-center space-x-3 cursor-pointer select-none" onclick="handleLogoClick()">
-                    <!-- <div class="w-12 h-12 bg-white text-mbBlue rounded-xl flex items-center justify-center font-black text-xl shadow-md border-2 border-mbBlueLight">
-                        <img src="logo.png" alt="">
-                    </div> -->
-                    <img src="logo.png" alt="" class="w-12 h-12">
+                    <img src="logo.jpg" alt="Logo SMA MB 1" class="w-12 h-12 object-contain">
                     <div>
                         <h1 class="text-xl font-bold tracking-tight title-polo">
                             SMA Mutiara Bangsa 1
@@ -64,16 +61,6 @@
                         <p class="text-xs text-blue-200 font-medium">Sistem Pemilihan Ketua OSIS Digital</p>
                     </div>
                 </div>
-
-                <!-- Navigation Tabs -->
-                <!-- <nav class="flex items-center space-x-2 sm:space-x-4">
-                    <button onclick="switchTab('voting')" id="btn-tab-voting" class="px-4 py-2 rounded-xl text-sm font-bold bg-mbBlueLight text-white shadow-sm transition">
-                        <i class="fa-solid fa-vote-yea mr-1.5"></i> Pemilihan
-                    </button>
-                    <button onclick="switchTab('stats')" id="btn-tab-stats" class="px-4 py-2 rounded-xl text-sm font-bold text-blue-100 hover:bg-blue-800 transition">
-                        <i class="fa-solid fa-chart-pie mr-1.5"></i> Perolehan Suara
-                    </button>
-                </nav> -->
             </div>
         </div>
     </header>
@@ -151,7 +138,7 @@
                 <p class="text-slate-500 text-xs mt-1">Tentukan masa depan OSIS SMA Mutiara Bangsa 1 dengan pilihan terbaik Anda.</p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
                 <!-- PASLON 01 -->
                 <div class="bg-white rounded-3xl overflow-hidden border-2 border-blue-100 hover:border-mbBlue transition duration-300 shadow-lg flex flex-col justify-between">
                     <div>
@@ -235,34 +222,6 @@
             </div>
         </section>
 
-        <!-- PUBLIC STATISTICAL CHARTS -->
-        <!-- <section id="section-stats" class="hidden space-y-8">
-            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-md border border-slate-200">
-                <div class="mb-6">
-                    <h2 class="text-2xl font-bold text-slate-900 title-polo flex items-center gap-2">
-                        <i class="fa-solid fa-chart-pie text-mbBlue"></i> Real-time Hasil Pemilihan
-                    </h2>
-                    <p class="text-slate-500 text-xs mt-1">Perolehan suara secara keseluruhan dan rincian berdasarkan angkatan.</p>
-                </div>
-
-                <div class="grid lg:grid-cols-2 gap-8">
-                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 flex flex-col items-center">
-                        <h3 class="font-bold text-slate-800 text-sm mb-4 text-center">🏆 Total Perolehan Suara Keseluruhan</h3>
-                        <div class="w-full h-64 relative flex items-center justify-center">
-                            <canvas id="chart-overall-pie"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 flex flex-col items-center">
-                        <h3 class="font-bold text-slate-800 text-sm mb-4 text-center">📊 Perolehan Suara Per Angkatan / Kategori</h3>
-                        <div class="w-full h-64 relative flex items-center justify-center">
-                            <canvas id="chart-angkatan-bar"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-
         <!-- ADMIN DASHBOARD -->
         <section id="section-admin-dashboard" class="hidden space-y-6">
             <div class="bg-mbBlueDark text-white rounded-3xl p-6 sm:p-8 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -278,13 +237,14 @@
                 </button>
             </div>
 
-            <!-- <div class="bg-white rounded-3xl p-6 shadow-md border border-slate-200 space-y-4">
-                <div class="flex flex-col sm:flex-row items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200">
-                    <span class="text-xs font-bold uppercase text-slate-600 flex items-center gap-1.5">
-                        <i class="fa-solid fa-filter text-mbBlue"></i> Filter Data:
-                    </span>
-
+            <!-- FILTER & REFRESH BAR -->
+            <div class="bg-white rounded-3xl p-6 shadow-md border border-slate-200 space-y-4">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200">
                     <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+                        <span class="text-xs font-bold uppercase text-slate-600 flex items-center gap-1.5">
+                            <i class="fa-solid fa-filter text-mbBlue"></i> Filter Data:
+                        </span>
+
                         <select id="admin-filter-angkatan" onchange="handleAdminAngkatanChange()" 
                             class="bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 outline-none focus:border-mbBlue">
                             <option value="All">Semua Angkatan / Status</option>
@@ -300,36 +260,13 @@
                             </select>
                         </div>
                     </div>
-                </div> -->
-                <!-- FILTER & REFRESH BAR -->
-                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200">
-                    <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
-                        <span class="text-xs font-bold uppercase text-slate-600 flex items-center gap-1.5">
-                            <i class="fa-solid fa-filter text-mbBlue"></i> Filter Data:
-                        </span>
 
-                        <select id="admin-filter-angkatan" onchange="handleAdminAngkatanChange()" 
-                            class="bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 outline-none focus:border-mbBlue">
-                            <option value="All">Semua Angkatan / Status</option>
-                            <option value="X">Angkatan X</option>
-                            <option value="XI">Angkatan XI</option>
-                            <option value="XII">Angkatan XII</option>
-                        </select>
-
-                        <div id="container-admin-filter-kelas" class="hidden">
-                            <select id="admin-filter-kelas" onchange="fetchAdminTableData()" 
-                                class="bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 outline-none focus:border-mbBlue">
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Tombol Refresh Tabel -->
                     <button onclick="fetchAdminTableData()" class="w-full sm:w-auto bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 px-4 py-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm active:scale-95">
                         <i class="fa-solid fa-rotate-right text-mbBlue"></i> Refresh Tabel
                     </button>
                 </div>
 
-                <!-- BOX INFO SISWA BELUM MEMILIH (Hanya muncul jika filter kelas spesifik dipilih) -->
+                <!-- BOX INFO SISWA BELUM MEMILIH -->
                 <div id="container-unvoted-info" class="hidden bg-amber-50 border border-amber-200 rounded-2xl p-4 space-y-2">
                     <div class="flex items-center justify-between">
                         <span class="text-xs font-bold text-amber-900 flex items-center gap-2">
@@ -338,9 +275,7 @@
                         </span>
                         <span id="unvoted-stat" class="text-[11px] text-amber-700 font-medium"></span>
                     </div>
-                    <div id="unvoted-list" class="flex flex-wrap gap-1.5 pt-1">
-                        <!-- Name badges akan di-render otomatis via Javascript -->
-                    </div>
+                    <div id="unvoted-list" class="flex flex-wrap gap-1.5 pt-1"></div>
                 </div>
           
                 <div class="overflow-x-auto rounded-2xl border border-slate-200">
@@ -355,8 +290,7 @@
                                 <th class="p-4 border-b">Waktu Pemilihan</th>
                             </tr>
                         </thead>
-                        <tbody id="admin-table-body" class="text-xs font-medium divide-y divide-slate-100">
-                        </tbody>
+                        <tbody id="admin-table-body" class="text-xs font-medium divide-y divide-slate-100"></tbody>
                     </table>
                 </div>
             </div>
@@ -368,9 +302,6 @@
     <footer class="bg-mbBlueDark text-blue-200 py-6 border-t border-blue-900 text-center text-xs mt-auto">
         <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
             <p>© SMA Mutiara Bangsa 1 - Pilketos Digital System</p>
-            <!-- <button onclick="openAdminModal()" class="text-blue-400 hover:text-white transition text-xs flex items-center gap-1 opacity-60 hover:opacity-100">
-                <i class="fa-solid fa-lock text-[10px]"></i> Admin
-            </button> -->
         </div>
     </footer>
 
@@ -406,7 +337,7 @@
         </div>
     </div>
 
-      <!-- MODAL KONFIRMASI DUAL VERIFIKASI -->
+    <!-- MODAL KONFIRMASI DUAL VERIFIKASI -->
     <div id="modal-confirm-vote" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center space-y-4 shadow-2xl border border-slate-100">
             <div class="w-16 h-16 bg-blue-50 text-mbBlue rounded-2xl flex items-center justify-center text-2xl mx-auto border border-blue-200">
@@ -414,10 +345,9 @@
             </div>
             <div>
                 <h3 class="text-lg font-bold text-slate-900 title-polo">Konfirmasi Pilihan</h3>
-                <p class="text-slate-500 text-xs mt-1">Apakah Anda yakin ingin memilih pasangan calon ini? Pilihan **tidak dapat diubah** setelah dikonfirmasi.</p>
+                <p class="text-slate-500 text-xs mt-1">Apakah Anda yakin ingin memilih pasangan calon ini? Pilihan <strong>tidak dapat diubah</strong> setelah dikonfirmasi.</p>
             </div>
             
-            <!-- Information Box Paslon Dipilih -->
             <div class="bg-slate-50 border border-slate-200 p-3 rounded-2xl text-left">
                 <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Pilihan Anda:</p>
                 <p id="confirm-paslon-title" class="text-sm font-bold text-mbBlueDark mt-0.5">-</p>
@@ -451,10 +381,14 @@
         let voterData = { nama: '', angkatan: '', kelas: '' };
         let databaseMurid = {};
         let logoClickCount = 0;
-        let pieChartInstance = null;
-        let barChartInstance = null;
+        let selectedPaslon = null;
 
-        // Load data.txt saat halaman dimuat
+        const paslonNames = {
+            1: "PASLON 01 - Giceline Nicole & Louie Isaac",
+            2: "PASLON 02 - Veda & Lyora",
+            3: "PASLON 03 - Budi Santoso & Miguel Julian"
+        };
+
         window.addEventListener('DOMContentLoaded', async () => {
             databaseMurid = await muatDataMurid();
             if (window.location.hash === '#admin') {
@@ -462,7 +396,6 @@
             }
         });
 
-        // 1. Fungsi Membaca file data.txt
         async function muatDataMurid() {
             try {
                 const response = await fetch('data.txt');
@@ -488,7 +421,6 @@
             }
         }
 
-        // 2. Filter Dropdown Kelas Berdasarkan Angkatan
         function handleAngkatanFormChange() {
             const angkatan = document.getElementById('voter-angkatan').value;
             const selectKelas = document.getElementById('voter-kelas');
@@ -516,7 +448,6 @@
             });
         }
 
-        // 3. Populate Dropdown Nama berdasarkan Kelas
         document.getElementById('voter-kelas').addEventListener('change', function() {
             const kelasDipilih = this.value;
             const selectMurid = document.getElementById('voter-nama');
@@ -532,30 +463,6 @@
                 });
             }
         });
-
-        // Navigation Tabs
-        function switchTab(tab) {
-            document.getElementById('step-login').classList.add('hidden');
-            document.getElementById('step-candidates').classList.add('hidden');
-            document.getElementById('section-stats').classList.add('hidden');
-            document.getElementById('section-admin-dashboard').classList.add('hidden');
-
-            document.getElementById('btn-tab-voting').className = "px-4 py-2 rounded-xl text-sm font-bold text-blue-100 hover:bg-blue-800 transition";
-            document.getElementById('btn-tab-stats').className = "px-4 py-2 rounded-xl text-sm font-bold text-blue-100 hover:bg-blue-800 transition";
-
-            if (tab === 'voting') {
-                document.getElementById('btn-tab-voting').className = "px-4 py-2 rounded-xl text-sm font-bold bg-mbBlueLight text-white shadow-sm transition";
-                if(voterData.nama) {
-                    document.getElementById('step-candidates').classList.remove('hidden');
-                } else {
-                    document.getElementById('step-login').classList.remove('hidden');
-                }
-            } else if (tab === 'stats') {
-                document.getElementById('btn-tab-stats').className = "px-4 py-2 rounded-xl text-sm font-bold bg-mbBlueLight text-white shadow-sm transition";
-                document.getElementById('section-stats').classList.remove('hidden');
-                loadPublicStats();
-            }
-        }
 
         function handleNextStep(e) {
             e.preventDefault();
@@ -578,50 +485,6 @@
             document.getElementById('step-login').classList.remove('hidden');
         }
 
-        // Aksi Coblos (Kirim Suara ke Cloudflare Workers D1 Backend API)
-        /*async function coblos(paslonNum) {
-            try {
-                const response = await fetch('/api/vote', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        nama: voterData.nama,
-                        angkatan: voterData.angkatan,
-                        kelas: voterData.kelas,
-                        pilih_nomor_berapa: paslonNum
-                    })
-                });
-
-                const res = await response.json();
-                if (res.success) {
-                    showAlertModal("Berhasil!", `Terima kasih ${voterData.nama}, suara Anda untuk Paslon 0${paslonNum} telah tersimpan!`, "success");
-                    
-                    document.getElementById('voter-nama').value = '';
-                    document.getElementById('voter-angkatan').value = '';
-                    document.getElementById('voter-kelas').value = '';
-                    voterData = { nama: '', angkatan: '', kelas: '' };
-                    
-                    setTimeout(() => {
-                        closeAlertModal();
-                        switchTab('voting');
-                    }, 2000);
-                } else {
-                    showAlertModal("Gagal", res.message || "Gagal menyimpan suara.", "danger");
-                }
-            } catch (err) {
-                showAlertModal("Gagal Connection", "Gagal terhubung ke backend server.", "danger");
-            }
-        }*/
-        let selectedPaslon = null;
-
-        // Nama Paslon untuk ditampilkan di popup konfirmasi
-        const paslonNames = {
-            1: "PASLON 01 - Giceline Nicole & Louie Isaac",
-            2: "PASLON 02 - Veda & Lyora",
-            3: "PASLON 03 - Budi Santoso & Miguel Julian"
-        };
-
-        // Step 1: Buka Modal Konfirmasi (Belum Kirim ke Server)
         function coblos(paslonNum) {
             selectedPaslon = paslonNum;
             document.getElementById('confirm-paslon-title').textContent = paslonNames[paslonNum] || `Paslon 0${paslonNum}`;
@@ -633,7 +496,6 @@
             selectedPaslon = null;
         }
 
-        // Step 2: Kirim Suara ke Backend setelah User Klik "Ya, Yakin"
         async function confirmCoblos() {
             if (!selectedPaslon) return;
 
@@ -666,86 +528,19 @@
                     
                     setTimeout(() => {
                         closeAlertModal();
-                        switchTab('voting');
+                        backToStep1();
                     }, 2000);
                 } else {
                     showAlertModal("Gagal", res.message || "Gagal menyimpan suara.", "danger");
                 }
             } catch (err) {
-                showAlertModal("Gagal Connection", "Gagal terhubung ke backend server.", "danger");
-            } finally {
+                showAlertModal("Gagal Koneksi", "Gagal terhubung ke backend server.", "danger");
+            } font-medium {
                 btnSubmit.disabled = false;
                 btnSubmit.innerHTML = '<i class="fa-solid fa-check"></i> Ya, Yakin';
             }
         }
-          
-        // Render Statistik Publik (Pie Chart & Horizontal Bar Chart)
-        async function loadPublicStats() {
-            let totalData = [0, 0];
-            let angkatanLabels = ['X', 'XI', 'XII', 'Guru'];
-            let paslon1PerAngkatan = [0, 0, 0, 0];
-            let paslon2PerAngkatan = [0, 0, 0, 0];
 
-            try {
-                const res = await fetch('/api/stats/public');
-                const data = await res.json();
-
-                if (data && data.total) {
-                    data.total.forEach(item => {
-                        if (Number(item.pilih_nomor_berapa) === 1) totalData[0] = item.total;
-                        if (Number(item.pilih_nomor_berapa) === 2) totalData[1] = item.total;
-                    });
-                }
-
-                if (data && data.angkatan) {
-                    data.angkatan.forEach(item => {
-                        const idx = angkatanLabels.indexOf(item.angkatan);
-                        if (idx !== -1) {
-                            if (Number(item.pilih_nomor_berapa) === 1) paslon1PerAngkatan[idx] = item.total;
-                            if (Number(item.pilih_nomor_berapa) === 2) paslon2PerAngkatan[idx] = item.total;
-                        }
-                    });
-                }
-            } catch (e) {
-                console.error("Gagal mengambil data statistik", e);
-            }
-
-            const ctxPie = document.getElementById('chart-overall-pie').getContext('2d');
-            if (pieChartInstance) pieChartInstance.destroy();
-            pieChartInstance = new Chart(ctxPie, {
-                type: 'pie',
-                data: {
-                    labels: ['Paslon 01', 'Paslon 02'],
-                    datasets: [{
-                        data: totalData,
-                        backgroundColor: ['#1d4ed8', '#1e3a8a'],
-                        borderWidth: 3,
-                        borderColor: '#ffffff'
-                    }]
-                },
-                options: { responsive: true, maintainAspectRatio: false }
-            });
-
-            const ctxBar = document.getElementById('chart-angkatan-bar').getContext('2d');
-            if (barChartInstance) barChartInstance.destroy();
-            barChartInstance = new Chart(ctxBar, {
-                type: 'bar',
-                data: {
-                    labels: angkatanLabels,
-                    datasets: [
-                        { label: 'Paslon 01', data: paslon1PerAngkatan, backgroundColor: '#3b82f6' },
-                        { label: 'Paslon 02', data: paslon2PerAngkatan, backgroundColor: '#1e3a8a' }
-                    ]
-                },
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
-            });
-        }
-
-        // Hidden Admin Trigger (Klik Logo 3x)
         function handleLogoClick() {
             logoClickCount++;
             if (logoClickCount >= 3) {
@@ -779,7 +574,6 @@
                     closeAdminModal();
                     document.getElementById('step-login').classList.add('hidden');
                     document.getElementById('step-candidates').classList.add('hidden');
-                    document.getElementById('section-stats').classList.add('hidden');
                     document.getElementById('section-admin-dashboard').classList.remove('hidden');
                     fetchAdminTableData();
                 } else {
@@ -792,7 +586,7 @@
 
         function adminLogout() {
             document.getElementById('section-admin-dashboard').classList.add('hidden');
-            switchTab('voting');
+            document.getElementById('step-login').classList.remove('hidden');
         }
 
         function handleAdminAngkatanChange() {
@@ -829,45 +623,6 @@
             fetchAdminTableData();
         }
 
-        /* async function fetchAdminTableData() {
-            const angkatan = document.getElementById('admin-filter-angkatan').value;
-            const containerKelasVisible = !document.getElementById('container-admin-filter-kelas').classList.contains('hidden');
-            const kelas = containerKelasVisible ? document.getElementById('admin-filter-kelas').value : 'All';
-
-            const tbody = document.getElementById('admin-table-body');
-            tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-slate-400">Loading data...</td></tr>';
-
-            try {
-                const res = await fetch(`/api/admin/votes?angkatan=${angkatan}&kelas=${kelas}`);
-                const rows = await res.json();
-
-                tbody.innerHTML = '';
-                if (!rows || rows.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-slate-400">Tidak ada data ditemukan.</td></tr>';
-                    return;
-                }
-
-                rows.forEach((row, index) => {
-                    const tr = document.createElement('tr');
-                    tr.className = "hover:bg-blue-50/50 transition border-b border-slate-100";
-                    tr.innerHTML = `
-                        <td class="p-4 text-slate-500 font-bold">${index + 1}</td>
-                        <td class="p-4 font-bold text-slate-900">${row.nama}</td>
-                        <td class="p-4 text-slate-700">${row.kelas}</td>
-                        <td class="p-4 text-slate-600">${row.angkatan}</td>
-                        <td class="p-4 text-center">
-                            <span class="px-2.5 py-1 rounded-full text-xs font-black ${row.pilih_nomor_berapa === 1 ? 'bg-blue-100 text-mbBlue' : 'bg-slate-900 text-white'}">
-                                Paslon 0${row.pilih_nomor_berapa}
-                            </span>
-                        </td>
-                        <td class="p-4 text-slate-500 text-[11px] font-mono">${row.waktu_pemilihan}</td>
-                    `;
-                    tbody.appendChild(tr);
-                });
-            } catch (err) {
-                tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-slate-400">Gagal terhubung ke database.</td></tr>';
-            }
-        } */
         async function fetchAdminTableData() {
             const angkatan = document.getElementById('admin-filter-angkatan').value;
             const containerKelasVisible = !document.getElementById('container-admin-filter-kelas').classList.contains('hidden');
@@ -894,7 +649,10 @@
                             <td class="p-4 text-slate-700">${row.kelas}</td>
                             <td class="p-4 text-slate-600">${row.angkatan}</td>
                             <td class="p-4 text-center">
-                                <span class="px-2.5 py-1 rounded-full text-xs font-black ${row.pilih_nomor_berapa === 1 ? 'bg-blue-100 text-mbBlue' : 'bg-slate-900 text-white'}">
+                                <span class="px-2.5 py-1 rounded-full text-xs font-black ${
+                                    row.pilih_nomor_berapa === 1 ? 'bg-blue-100 text-mbBlue' : 
+                                    row.pilih_nomor_berapa === 2 ? 'bg-indigo-100 text-indigo-900' : 'bg-slate-900 text-white'
+                                }">
                                     Paslon 0${row.pilih_nomor_berapa}
                                 </span>
                             </td>
@@ -904,7 +662,6 @@
                     });
                 }
 
-                // CEK & TAMPILKAN DAFTAR SISWA YANG BELUM MEMILIH (Hanya jika filter kelas spesifik)
                 if (kelas !== 'All' && databaseMurid[kelas]) {
                     const totalSiswaKelas = databaseMurid[kelas];
                     const sudahMilihSet = new Set((rows || []).map(r => r.nama));
@@ -915,11 +672,11 @@
                     const unvotedStatEl = document.getElementById('unvoted-stat');
 
                     unvotedCountEl.textContent = `${belumMilihList.length} orang`;
-                    unvotedStatEl.textContent = `(${sudahMilihSet.size} dari ${totalSiswaKelas.length} siswa sudah memilih)`;
+                    unvotedStatEl.textContent = `(${sudahMilihSet.size} dari ${totalSiswaKelas.length} siswa/guru sudah memilih)`;
                     unvotedListEl.innerHTML = '';
 
                     if (belumMilihList.length === 0) {
-                        unvotedListEl.innerHTML = '<span class="text-xs text-emerald-700 font-bold flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Luar biasa! Semua siswa di kelas ini sudah menggunakan hak pilihnya.</span>';
+                        unvotedListEl.innerHTML = '<span class="text-xs text-emerald-700 font-bold flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Luar biasa! Semua di kelas/kategori ini sudah menggunakan hak pilihnya.</span>';
                     } else {
                         belumMilihList.forEach(nama => {
                             const badge = document.createElement('span');
