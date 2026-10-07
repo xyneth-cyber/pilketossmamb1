@@ -641,6 +641,9 @@
         async function confirmCoblos() {
             if (!selectedPaslon) return;
             alert (selectedPaslon);
+            alert (voterData.nama);
+            alert (voterData.angkatan);
+            alert (voterData.kelas);
 
             const btnSubmit = document.getElementById('btn-submit-vote');
             btnSubmit.disabled = true;
