@@ -644,7 +644,13 @@
             alert (voterData.nama);
             alert (voterData.angkatan);
             alert (voterData.kelas);
-
+            console.log("Data dikirim:", {
+                nama: voterData.nama,
+                angkatan: voterData.angkatan,
+                kelas: voterData.kelas,
+                pilih_nomor_berapa: selectedPaslon
+            });
+            
             const btnSubmit = document.getElementById('btn-submit-vote');
             btnSubmit.disabled = true;
             btnSubmit.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Memproses...';
