@@ -640,6 +640,7 @@
         // Step 2: Kirim Suara ke Backend setelah User Klik "Ya, Yakin"
         async function confirmCoblos() {
             if (!selectedPaslon) return;
+            const chosenPaslon = Number(selectedPaslon);
             alert (selectedPaslon);
             alert (voterData.nama);
             alert (voterData.angkatan);
@@ -665,7 +666,7 @@
                         nama: voterData.nama,
                         angkatan: voterData.angkatan,
                         kelas: voterData.kelas,
-                        pilih_nomor_berapa: selectedPaslon
+                        pilih_nomor_berapa: chosenPaslon
                     })
                 });
 
