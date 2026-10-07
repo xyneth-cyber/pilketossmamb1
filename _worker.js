@@ -14,7 +14,7 @@ function jsonResponse(data, status = 200) {
     });
 }
 
-/*export default {
+export default {
     async fetch(request, env, ctx) {
         const url = new URL(request.url);
         const path = url.pathname;
@@ -118,9 +118,9 @@ function jsonResponse(data, status = 200) {
         // Jika request bukan diawali /api, sajikan frontend static (index.html, data.txt)
         return env.ASSETS.fetch(request);
     }
-};*/
+};
 
-export default {
+/* export default {
     async fetch(request, env, ctx) {
         const url = new URL(request.url);
         const path = url.pathname;
@@ -255,4 +255,4 @@ export default {
         // Menyajikan file statis frontend (index.html, data.txt, dll)
         return env.ASSETS.fetch(request);
     }
-};
+}; */
