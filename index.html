@@ -1,4 +1,4 @@
-                <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -53,9 +53,10 @@
             <div class="flex items-center justify-between h-20">
                 <!-- Logo Sekolah (Klik 3x untuk buka Login Admin Rahasia) -->
                 <div class="flex items-center space-x-3 cursor-pointer select-none" onclick="handleLogoClick()">
-                    <div class="w-12 h-12 bg-white text-mbBlue rounded-xl flex items-center justify-center font-black text-xl shadow-md border-2 border-mbBlueLight">
-                        MB1
-                    </div>
+                    <!-- <div class="w-12 h-12 bg-white text-mbBlue rounded-xl flex items-center justify-center font-black text-xl shadow-md border-2 border-mbBlueLight">
+                        <img src="logo.png" alt="">
+                    </div> -->
+                    <img src="logo.png" alt="" class="w-12 h-12">
                     <div>
                         <h1 class="text-xl font-bold tracking-tight title-polo">
                             SMA Mutiara Bangsa 1
@@ -65,14 +66,14 @@
                 </div>
 
                 <!-- Navigation Tabs -->
-                <nav class="flex items-center space-x-2 sm:space-x-4">
+                <!-- <nav class="flex items-center space-x-2 sm:space-x-4">
                     <button onclick="switchTab('voting')" id="btn-tab-voting" class="px-4 py-2 rounded-xl text-sm font-bold bg-mbBlueLight text-white shadow-sm transition">
                         <i class="fa-solid fa-vote-yea mr-1.5"></i> Pemilihan
                     </button>
                     <button onclick="switchTab('stats')" id="btn-tab-stats" class="px-4 py-2 rounded-xl text-sm font-bold text-blue-100 hover:bg-blue-800 transition">
                         <i class="fa-solid fa-chart-pie mr-1.5"></i> Perolehan Suara
                     </button>
-                </nav>
+                </nav> -->
             </div>
         </div>
     </header>
@@ -158,7 +159,7 @@
                             <span class="bg-white text-mbBlue font-black text-xs px-3 py-1 rounded-full uppercase tracking-wider inline-block">
                                 NO. URUT 01
                             </span>
-                            <h3 class="text-xl font-bold mt-2 title-polo">Ahmad Fauzi & Siti Rahma</h3>
+                            <h3 class="text-xl font-bold mt-2 title-polo">Giceline Nicole & Louie Isaac</h3>
                             <p class="text-xs text-blue-100">Kandidat Ketua & Wakil Ketua</p>
                         </div>
                         <div class="p-6 text-center">
@@ -185,7 +186,7 @@
                             <span class="bg-white text-mbBlueDark font-black text-xs px-3 py-1 rounded-full uppercase tracking-wider inline-block">
                                 NO. URUT 02
                             </span>
-                            <h3 class="text-xl font-bold mt-2 title-polo">Budi Santoso & Dewi Lestari</h3>
+                            <h3 class="text-xl font-bold mt-2 title-polo">Veda & Lyora</h3>
                             <p class="text-xs text-blue-200">Kandidat Ketua & Wakil Ketua</p>
                         </div>
                         <div class="p-6 text-center">
@@ -204,11 +205,38 @@
                         </button>
                     </div>
                 </div>
+
+                <!-- PASLON 03 -->
+                <div class="bg-white rounded-3xl overflow-hidden border-2 border-blue-100 hover:border-mbBlue transition duration-300 shadow-lg flex flex-col justify-between">
+                    <div>
+                        <div class="bg-mbBlueDark p-4 text-white text-center">
+                            <span class="bg-white text-mbBlueDark font-black text-xs px-3 py-1 rounded-full uppercase tracking-wider inline-block">
+                                NO. URUT 03
+                            </span>
+                            <h3 class="text-xl font-bold mt-2 title-polo">Budi Santoso & Miguel Julian</h3>
+                            <p class="text-xs text-blue-200">Kandidat Ketua & Wakil Ketua</p>
+                        </div>
+                        <div class="p-6 text-center">
+                            <div class="w-24 h-24 bg-blue-100 rounded-full mx-auto flex items-center justify-center text-mbBlueDark text-4xl mb-4 border-2 border-blue-200">
+                                <i class="fa-solid fa-user-graduate"></i>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-2xl text-left border border-slate-100">
+                                <h4 class="font-bold text-slate-900 text-xs uppercase mb-1 text-mbBlueDark">Visi & Misi</h4>
+                                <p class="text-xs text-slate-600 font-medium">"Menciptakan lingkungan sekolah yang kolaboratif, kreatif, responsif terhadap aspirasi siswa, serta berwawasan lingkungan."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <button onclick="coblos(2)" class="w-full bg-mbBlueDark hover:bg-slate-900 text-white font-bold py-3.5 rounded-xl shadow-md transition transform active:scale-95 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-check-circle"></i> COBLOS PASLON 03
+                        </button>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- PUBLIC STATISTICAL CHARTS -->
-        <section id="section-stats" class="hidden space-y-8">
+        <!-- <section id="section-stats" class="hidden space-y-8">
             <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-md border border-slate-200">
                 <div class="mb-6">
                     <h2 class="text-2xl font-bold text-slate-900 title-polo flex items-center gap-2">
@@ -233,7 +261,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <!-- ADMIN DASHBOARD -->
         <section id="section-admin-dashboard" class="hidden space-y-6">
@@ -286,7 +314,6 @@
                             <option value="X">Angkatan X</option>
                             <option value="XI">Angkatan XI</option>
                             <option value="XII">Angkatan XII</option>
-                            <option value="Guru">Guru / Staf</option>
                         </select>
 
                         <div id="container-admin-filter-kelas" class="hidden">
@@ -341,9 +368,9 @@
     <footer class="bg-mbBlueDark text-blue-200 py-6 border-t border-blue-900 text-center text-xs mt-auto">
         <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
             <p>© SMA Mutiara Bangsa 1 - Pilketos Digital System</p>
-            <button onclick="openAdminModal()" class="text-blue-400 hover:text-white transition text-xs flex items-center gap-1 opacity-60 hover:opacity-100">
+            <!-- <button onclick="openAdminModal()" class="text-blue-400 hover:text-white transition text-xs flex items-center gap-1 opacity-60 hover:opacity-100">
                 <i class="fa-solid fa-lock text-[10px]"></i> Admin
-            </button>
+            </button> -->
         </div>
     </footer>
 
