@@ -712,7 +712,7 @@ async function loadPublicStats() {
     let totalData = [0, 0, 0];
 
     try {
-        const res = await fetch('/api/stats/public');
+        const res = await fetch('https://pilketossmamb1.pages.dev/api/stats/public');
         const data = await res.json();
 
         if (data && data.total) {
