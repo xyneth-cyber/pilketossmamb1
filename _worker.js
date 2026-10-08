@@ -14,7 +14,7 @@ function jsonResponse(data, status = 200) {
     });
 }
 
-/*export default {
+/*export default { abher
     async fetch(request, env, ctx) {
         const url = new URL(request.url);
         const path = url.pathname;
