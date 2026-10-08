@@ -217,7 +217,7 @@
                     <p class="text-slate-500 text-xs mt-1">Perolehan suara secara keseluruhan dan rincian berdasarkan angkatan.</p>
                 </div>
 
-                <div class="grid lg:grid-cols-2 gap-8">
+                <div class="grid lg:grid-cols-1 gap-8">
                     <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 flex flex-col items-center">
                         <h3 class="font-bold text-slate-800 text-sm mb-4 text-center">🏆 Total Perolehan Suara Keseluruhan</h3>
                         <div class="w-full h-64 relative flex items-center justify-center">
@@ -341,7 +341,7 @@
     </footer>
 
     <!-- MODAL ADMIN LOGIN -->
-    <div id="modal-admin-login" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <!--<div id="modal-admin-login" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full shadow-2xl space-y-4">
             <div class="text-center">
                 <div class="w-12 h-12 bg-blue-100 text-mbBlue rounded-xl flex items-center justify-center text-xl mx-auto mb-2">
@@ -370,10 +370,10 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div>-->
 
       <!-- MODAL KONFIRMASI DUAL VERIFIKASI -->
-    <div id="modal-confirm-vote" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <!--<div id="modal-confirm-vote" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center space-y-4 shadow-2xl border border-slate-100">
             <div class="w-16 h-16 bg-blue-50 text-mbBlue rounded-2xl flex items-center justify-center text-2xl mx-auto border border-blue-200">
                 <i class="fa-solid fa-circle-question text-mbBlue"></i>
@@ -381,10 +381,10 @@
             <div>
                 <h3 class="text-lg font-bold text-slate-900 title-polo">Konfirmasi Pilihan</h3>
                 <p class="text-slate-500 text-xs mt-1">Apakah Anda yakin ingin memilih pasangan calon ini? Pilihan **tidak dapat diubah** setelah dikonfirmasi.</p>
-            </div>
+            </div>-->
             
             <!-- Information Box Paslon Dipilih -->
-            <div class="bg-slate-50 border border-slate-200 p-3 rounded-2xl text-left">
+            <!--<div class="bg-slate-50 border border-slate-200 p-3 rounded-2xl text-left">
                 <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Pilihan Anda:</p>
                 <p id="confirm-paslon-title" class="text-sm font-bold text-mbBlueDark mt-0.5">-</p>
             </div>
@@ -398,10 +398,10 @@
                 </button>
             </div>
         </div>
-    </div>
+    </div>-->
   
     <!-- MODAL POPUP NOTIFIKASI -->
-    <div id="modal-alert" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <!--<div id="modal-alert" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl p-6 max-w-xs w-full text-center space-y-3 shadow-2xl">
             <div id="alert-icon" class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mx-auto"></div>
             <h4 id="alert-title" class="text-base font-bold text-slate-900 title-polo"></h4>
@@ -410,7 +410,7 @@
                 Tutup
             </button>
         </div>
-    </div>
+    </div>-->
 
     <!-- JAVASCRIPT APP LOGIC -->
     <script>
@@ -646,7 +646,7 @@
         }*/
           
         // Render Statistik Publik (Pie Chart & Horizontal Bar Chart)
-        async function loadPublicStats() {
+        /*async function loadPublicStats() {
             let totalData = [0, 0];
             let angkatanLabels = ['X', 'XI', 'XII', 'Guru'];
             let paslon1PerAngkatan = [0, 0, 0, 0];
@@ -709,10 +709,53 @@
                     maintainAspectRatio: false
                 }
             });
-        }
+        }*/
+async function loadPublicStats() {
+    let totalData = [0, 0, 0];
 
+    try {
+        const res = await fetch('/api/stats/public');
+        const data = await res.json();
+
+        if (data && data.total) {
+            data.total.forEach(item => {
+                const paslonNum = Number(item.pilih_nomor_berapa);
+                if (paslonNum >= 1 && paslonNum <= 3) {
+                    totalData[paslonNum - 1] = item.total;
+                }
+            });
+        }
+    } catch (e) {
+        console.error("Gagal mengambil data statistik", e);
+    }
+
+    const ctxPie = document.getElementById('chart-overall-pie').getContext('2d');
+    if (pieChartInstance) pieChartInstance.destroy();
+
+    pieChartInstance = new Chart(ctxPie, {
+        type: 'pie',
+        data: {
+            labels: ['Paslon 01', 'Paslon 02', 'Paslon 03'],
+            datasets: [{
+                data: totalData,
+                backgroundColor: ['#2563eb', '#1e3a8a', '#e11d48'],
+                borderWidth: 3,
+                borderColor: '#ffffff'
+            }]
+        },
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+}
         // Hidden Admin Trigger (Klik Logo 3x)
-        function handleLogoClick() {
+        /* function handleLogoClick() {
             logoClickCount++;
             if (logoClickCount >= 3) {
                 logoClickCount = 0;
@@ -793,7 +836,7 @@
             }
 
             fetchAdminTableData();
-        }
+        }*/
 
         /* async function fetchAdminTableData() {
             const angkatan = document.getElementById('admin-filter-angkatan').value;
@@ -834,7 +877,7 @@
                 tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-slate-400">Gagal terhubung ke database.</td></tr>';
             }
         } */
-        async function fetchAdminTableData() {
+        /*async function fetchAdminTableData() {
             const angkatan = document.getElementById('admin-filter-angkatan').value;
             const containerKelasVisible = !document.getElementById('container-admin-filter-kelas').classList.contains('hidden');
             const kelas = containerKelasVisible ? document.getElementById('admin-filter-kelas').value : 'All';
@@ -904,9 +947,9 @@
                 tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-slate-400">Gagal terhubung ke database.</td></tr>';
                 containerUnvoted.classList.add('hidden');
             }
-        }
+        }*/
 
-        function showAlertModal(title, msg, type) {
+        /*function showAlertModal(title, msg, type) {
             const icon = document.getElementById('alert-icon');
             document.getElementById('alert-title').textContent = title;
             document.getElementById('alert-msg').textContent = msg;
@@ -927,7 +970,7 @@
 
         function closeAlertModal() {
             document.getElementById('modal-alert').classList.add('hidden');
-        }
+        }*/
     </script>
 </body>
 </html>
