@@ -423,16 +423,12 @@
         let barChartInstance = null;
 
         // Load data.txt saat halaman dimuat
-        /* window.addEventListener('DOMContentLoaded', async () => {
-            databaseMurid = await muatDataMurid();
-            if (window.location.hash === '#admin') {
-                openAdminModal();
-            }
-            switchTab('stats')
+        window.addEventListener('DOMContentLoaded', async () => {
+            loadPublicStats();
         });
 
         // 1. Fungsi Membaca file data.txt
-        async function muatDataMurid() {
+        /* async function muatDataMurid() {
             try {
                 const response = await fetch('data.txt');
                 if (!response.ok) return {};
