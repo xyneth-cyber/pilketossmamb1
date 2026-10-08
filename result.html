@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PILKETOS - SMA Mutiara Bangsa 1</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- FontAwesome Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="logo.png">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mbBlue: '#1d4ed8',      /* Biru Utama Sekolah */
+                        mbBlueDark: '#1e3a8a',  /* Biru Tua Navbar/Footer */
+                        mbBlueLight: '#3b82f6', /* Biru Accent */
+                        mbSky: '#dbeafe',       /* Biru Muda Accent */
+                        mbBg: '#f8fafc'         /* Background */
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @font-face {
+            font-family: 'Polo';
+            src: local('Polo'), local('Polo-Regular'), local('Arial');
+        }
+
+        body, button, input, select {
+            font-family: 'Polo', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .title-polo {
+            font-family: 'Polo', sans-serif;
+            letter-spacing: -0.02em;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col text-slate-800">
+
+    <!-- HEADER / NAVBAR -->
+    <header class="bg-mbBlueDark text-white shadow-md sticky top-0 z-40 border-b border-blue-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo Sekolah (Klik 3x untuk buka Login Admin Rahasia) -->
+                <div class="flex items-center space-x-3 cursor-pointer select-none" onclick="handleLogoClick()">
+                    <!--<div class="w-12 h-12 bg-white text-mbBlue rounded-xl flex items-center justify-center font-black text-xl shadow-md border-2 border-mbBlueLight">
+                
+                    </div>-->
+                    <img src="logo.png" alt="MB" class="w-12 h-12 flex">
+                    <div>
+                        <h1 class="text-xl font-bold tracking-tight title-polo">
+                            SMA Mutiara Bangsa 1
+                        </h1>
+                        <p class="text-xs text-blue-200 font-medium">Sistem Pemilihan Ketua OSIS Digital</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs -->
+                <!--<nav class="flex items-center space-x-2 sm:space-x-4">
+                    <button onclick="switchTab('voting')" id="btn-tab-voting" class="px-4 py-2 rounded-xl text-sm font-bold bg-mbBlueLight text-white shadow-sm transition">
+                        <i class="fa-solid fa-vote-yea mr-1.5"></i> Pemilihan
+                    </button>
+                    <button onclick="switchTab('stats')" id="btn-tab-stats" class="px-4 py-2 rounded-xl text-sm font-bold text-blue-100 hover:bg-blue-800 transition">
+                        <i class="fa-solid fa-chart-pie mr-1.5"></i> Perolehan Suara
+                    </button>
+                </nav>-->
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 max-w-5xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- STEP 1: VERIFIKASI PEMILIH -->
+        <!-- <section id="step-login" class="space-y-6">
+            <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-blue-100 max-w-xl mx-auto">
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 bg-blue-50 text-mbBlue rounded-2xl flex items-center justify-center text-2xl mx-auto mb-3 border border-blue-200">
+                        <i class="fa-solid fa-id-card-clip"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-900 title-polo">Verifikasi Identitas Pemilih</h2>
+                    <p class="text-slate-500 text-xs mt-1">Silakan masukkan data diri Anda sebelum melangkah ke bilik suara.</p>
+                </div>
+
+                <form onsubmit="handleNextStep(event)" class="space-y-5"> -->
+                    <!-- Dropdown 1: Angkatan / Status -->
+                    <!-- <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Angkatan / Status</label>
+                        <select id="voter-angkatan" onchange="handleAngkatanFormChange()" required 
+                            class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl font-medium focus:border-mbBlue focus:ring-2 focus:ring-blue-100 outline-none transition text-sm">
+                            <option value="">-- Pilih Angkatan / Status --</option>
+                            <option value="X">Kelas X</option>
+                            <option value="XI">Kelas XI</option>
+                            <option value="XII">Kelas XII</option>
+                            <option value="Guru">Guru / Staf Pengajar</option>
+                        </select>
+                    </div> -->
+
+                    <!-- Dropdown 2: Kelas (Dinamis) -->
+                    <!-- <div id="container-voter-kelas">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Pilih Kelas</label>
+                        <select id="voter-kelas" required 
+                            class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl font-medium focus:border-mbBlue focus:ring-2 focus:ring-blue-100 outline-none transition text-sm">
+                            <option value="">-- Pilih Angkatan Terlebih Dahulu --</option>
+                        </select>
+                    </div>-->
+
+                    <!-- Dropdown 3: Nama Pemilih (Dinamis) -->
+                    <!-- <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Nama Lengkap</label>
+                        <select id="voter-nama" required  
+                            class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl focus:border-mbBlue focus:ring-2 focus:ring-blue-100 outline-none transition text-sm">
+                            <option value="">-- Pilih Kelas Terlebih Dahulu --</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="w-full bg-mbBlue hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-blue-500/20 transition transform active:scale-98 flex items-center justify-center gap-2 text-base">
+                        Lanjut ke Pilih Calon <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+        </section>-->
+
+        <!-- STEP 2: PILIH CALON KETUA OSIS -->
+        <!--<section id="step-candidates" class="hidden space-y-6">
+            <div class="bg-blue-50 border border-blue-200 text-mbBlueDark p-4 rounded-2xl flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-user-check text-xl text-mbBlue"></i>
+                    <div>
+                        <p class="text-xs text-blue-600 font-bold uppercase">Pemilih Terverifikasi</p>
+                        <p class="text-sm font-bold" id="display-voter-info">-</p>
+                    </div>
+                </div>
+                <button onclick="backToStep1()" class="text-xs text-blue-600 hover:underline font-bold">
+                    <i class="fa-solid fa-pen"></i> Ubah Data
+                </button>
+            </div>
+
+            <div class="text-center max-w-xl mx-auto mb-6">
+                <h2 class="text-2xl font-bold text-slate-900 title-polo">Pilih Pasangan Calon Ketua OSIS</h2>
+                <p class="text-slate-500 text-xs mt-1">Tentukan masa depan OSIS SMA Mutiara Bangsa 1 dengan pilihan terbaik Anda.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto"> -->
+                <!-- PASLON 01 -->
+                <!-- <div class="bg-white rounded-3xl overflow-hidden border-2 border-blue-100 hover:border-mbBlue transition duration-300 shadow-lg flex flex-col justify-between">
+                    <div>
+                        <div class="bg-mbBlue p-4 text-white text-center">
+                            <span class="bg-white text-mbBlue font-black text-xs px-3 py-1 rounded-full uppercase tracking-wider inline-block">
+                                NO. URUT 01
+                            </span>
+                            <h3 class="text-xl font-bold mt-2 title-polo">Ahmad Fauzi & Siti Rahma</h3>
+                            <p class="text-xs text-blue-100">Kandidat Ketua & Wakil Ketua</p>
+                        </div>
+                        <div class="p-6 text-center">
+                            <div class="w-24 h-24 bg-blue-100 rounded-full mx-auto flex items-center justify-center text-mbBlue text-4xl mb-4 border-2 border-blue-200">
+                                <i class="fa-solid fa-user-tie"></i>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-2xl text-left border border-slate-100">
+                                <h4 class="font-bold text-slate-900 text-xs uppercase mb-1 text-mbBlue">Visi & Misi</h4>
+                                <p class="text-xs text-slate-600 font-medium">"Mewujudkan OSIS SMA Mutiara Bangsa 1 yang inovatif, berintegritas, aktif, serta mendukung potensi akademis dan non-akademis seluruh siswa."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <button onclick="coblos(1)" class="w-full bg-mbBlue hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl shadow-md transition transform active:scale-95 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-check-circle"></i> COBLOS PASLON 01
+                        </button>
+                    </div>
+                </div> -->
+
+                <!-- PASLON 02 -->
+                <!-- <div class="bg-white rounded-3xl overflow-hidden border-2 border-blue-100 hover:border-mbBlue transition duration-300 shadow-lg flex flex-col justify-between">
+                    <div>
+                        <div class="bg-mbBlueDark p-4 text-white text-center">
+                            <span class="bg-white text-mbBlueDark font-black text-xs px-3 py-1 rounded-full uppercase tracking-wider inline-block">
+                                NO. URUT 02
+                            </span>
+                            <h3 class="text-xl font-bold mt-2 title-polo">Budi Santoso & Dewi Lestari</h3>
+                            <p class="text-xs text-blue-200">Kandidat Ketua & Wakil Ketua</p>
+                        </div>
+                        <div class="p-6 text-center">
+                            <div class="w-24 h-24 bg-blue-100 rounded-full mx-auto flex items-center justify-center text-mbBlueDark text-4xl mb-4 border-2 border-blue-200">
+                                <i class="fa-solid fa-user-graduate"></i>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-2xl text-left border border-slate-100">
+                                <h4 class="font-bold text-slate-900 text-xs uppercase mb-1 text-mbBlueDark">Visi & Misi</h4>
+                                <p class="text-xs text-slate-600 font-medium">"Menciptakan lingkungan sekolah yang kolaboratif, kreatif, responsif terhadap aspirasi siswa, serta berwawasan lingkungan."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <button onclick="coblos(2)" class="w-full bg-mbBlueDark hover:bg-slate-900 text-white font-bold py-3.5 rounded-xl shadow-md transition transform active:scale-95 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-check-circle"></i> COBLOS PASLON 02
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+        <!-- PUBLIC STATISTICAL CHARTS -->
+        <section id="section-stats" class="space-y-8">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-md border border-slate-200">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-slate-900 title-polo flex items-center gap-2">
+                        <i class="fa-solid fa-chart-pie text-mbBlue"></i> Hasil Pemilihan Ketua dan Wakil Ketua Osis
+                    </h2>
+                    <p class="text-slate-500 text-xs mt-1">Perolehan suara secara keseluruhan</p>
+                </div>
+
+                <div class="grid lg:grid-cols-1 gap-8">
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 flex flex-col items-center">
+                        <h3 class="font-bold text-slate-800 text-sm mb-4 text-center">🏆 Total Perolehan Suara Keseluruhan</h3>
+                        <div class="w-full h-64 relative flex items-center justify-center">
+                            <canvas id="chart-overall-pie"></canvas>
+                        </div>
+                    </div>
+                  </div>
+            </div>
+        </section>
+
+        <!-- ADMIN DASHBOARD -->
+        <!-- <section id="section-admin-dashboard" class="hidden space-y-6">
+            <div class="bg-mbBlueDark text-white rounded-3xl p-6 sm:p-8 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div>
+                    <span class="bg-blue-400 text-slate-950 font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">
+                        Akses Administrator
+                    </span>
+                    <h2 class="text-2xl font-bold mt-2 title-polo">Rekapitulasi Suara Masuk</h2>
+                    <p class="text-blue-200 text-xs mt-0.5">Daftar lengkap pemilih dan waktu pencoblosan.</p>
+                </div>
+                <button onclick="adminLogout()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition shadow">
+                    <i class="fa-solid fa-sign-out-alt"></i> Logout Admin
+                </button>
+            </div>-->
+
+            <!-- <div class="bg-white rounded-3xl p-6 shadow-md border border-slate-200 space-y-4">
+                <div class="flex flex-col sm:flex-row items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                    <span class="text-xs font-bold uppercase text-slate-600 flex items-center gap-1.5">
+                        <i class="fa-solid fa-filter text-mbBlue"></i> Filter Data:
+                    </span>
+
+                    <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+                        <select id="admin-filter-angkatan" onchange="handleAdminAngkatanChange()" 
+                            class="bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 outline-none focus:border-mbBlue">
+                            <option value="All">Semua Angkatan / Status</option>
+                            <option value="X">Angkatan X</option>
+                            <option value="XI">Angkatan XI</option>
+                            <option value="XII">Angkatan XII</option>
+                            <option value="Guru">Guru / Staf</option>
+                        </select>
+
+                        <div id="container-admin-filter-kelas" class="hidden">
+                            <select id="admin-filter-kelas" onchange="fetchAdminTableData()" 
+                                class="bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 outline-none focus:border-mbBlue">
+                            </select>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- FILTER & REFRESH BAR -->
+                <!--<div class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                    <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+                        <span class="text-xs font-bold uppercase text-slate-600 flex items-center gap-1.5">
+                            <i class="fa-solid fa-filter text-mbBlue"></i> Filter Data:
+                        </span>
+
+                        <select id="admin-filter-angkatan" onchange="handleAdminAngkatanChange()" 
+                            class="bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 outline-none focus:border-mbBlue">
+                            <option value="All">Semua Angkatan / Status</option>
+                            <option value="X">Angkatan X</option>
+                            <option value="XI">Angkatan XI</option>
+                            <option value="XII">Angkatan XII</option>
+                            <option value="Guru">Guru / Staf</option>
+                        </select>
+
+                        <div id="container-admin-filter-kelas" class="hidden">
+                            <select id="admin-filter-kelas" onchange="fetchAdminTableData()" 
+                                class="bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 outline-none focus:border-mbBlue">
+                            </select>
+                        </div>
+                    </div>-->
+
+                    <!-- Tombol Refresh Tabel -->
+                    <!--<button onclick="fetchAdminTableData()" class="w-full sm:w-auto bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 px-4 py-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm active:scale-95">
+                        <i class="fa-solid fa-rotate-right text-mbBlue"></i> Refresh Tabel
+                    </button>
+                </div>-->
+
+                <!-- BOX INFO SISWA BELUM MEMILIH (Hanya muncul jika filter kelas spesifik dipilih) -->
+                <!--<div id="container-unvoted-info" class="hidden bg-amber-50 border border-amber-200 rounded-2xl p-4 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-amber-900 flex items-center gap-2">
+                            <i class="fa-solid fa-user-clock text-amber-600 text-sm"></i> 
+                            Siswa Belum Memilih: <span id="unvoted-count" class="bg-amber-200 text-amber-900 px-2 py-0.5 rounded-full text-[11px] font-black">0</span>
+                        </span>
+                        <span id="unvoted-stat" class="text-[11px] text-amber-700 font-medium"></span>
+                    </div>
+                    <div id="unvoted-list" class="flex flex-wrap gap-1.5 pt-1">-->
+                        <!-- Name badges akan di-render otomatis via Javascript -->
+                    <!--</div>
+                </div>
+          
+                <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700 text-xs uppercase tracking-wider">
+                                <th class="p-4 border-b">No.</th>
+                                <th class="p-4 border-b">Nama Pemilih</th>
+                                <th class="p-4 border-b">Kelas</th>
+                                <th class="p-4 border-b">Angkatan/Status</th>
+   
