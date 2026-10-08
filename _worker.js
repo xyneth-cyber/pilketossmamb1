@@ -82,7 +82,11 @@ export default {
                     `SELECT angkatan, pilih_nomor_berapa, COUNT(*) as total FROM voting_results GROUP BY angkatan, pilih_nomor_berapa`
                 ).all();*/
 
-                return jsonResponse({ total, angkatan });
+                //return jsonResponse({ total, angkatan });
+                return jsonResponse({ 
+            success: true, 
+            total: query.results || [] 
+        });
             } catch (err) {
                 return jsonResponse({ success: false, message: err.message }, 500);
             }
