@@ -208,7 +208,7 @@
         </section> -->
 
         <!-- PUBLIC STATISTICAL CHARTS -->
-        <section id="section-stats" class="hidden space-y-8">
+        <section id="section-stats" class="space-y-8">
             <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-md border border-slate-200">
                 <div class="mb-6">
                     <h2 class="text-2xl font-bold text-slate-900 title-polo flex items-center gap-2">
@@ -414,14 +414,14 @@
 
     <!-- JAVASCRIPT APP LOGIC -->
     <script>
-        let voterData = { nama: '', angkatan: '', kelas: '' };
-        let databaseMurid = {};
-        let logoClickCount = 0;
+        // let voterData = { nama: '', angkatan: '', kelas: '' };
+        // let databaseMurid = {};
+        // let logoClickCount = 0;
         let pieChartInstance = null;
         let barChartInstance = null;
 
         // Load data.txt saat halaman dimuat
-        window.addEventListener('DOMContentLoaded', async () => {
+        /* window.addEventListener('DOMContentLoaded', async () => {
             databaseMurid = await muatDataMurid();
             if (window.location.hash === '#admin') {
                 openAdminModal();
@@ -543,7 +543,7 @@
         function backToStep1() {
             document.getElementById('step-candidates').classList.add('hidden');
             document.getElementById('step-login').classList.remove('hidden');
-        }
+        }*/
 
         // Aksi Coblos (Kirim Suara ke Cloudflare Workers D1 Backend API)
         /*async function coblos(paslonNum) {
@@ -579,7 +579,7 @@
                 showAlertModal("Gagal Connection", "Gagal terhubung ke backend server.", "danger");
             }
         }*/
-        let selectedPaslon = null;
+        /*let selectedPaslon = null;
 
         // Nama Paslon untuk ditampilkan di popup konfirmasi
         const paslonNames = {
@@ -643,7 +643,7 @@
                 btnSubmit.disabled = false;
                 btnSubmit.innerHTML = '<i class="fa-solid fa-check"></i> Ya, Yakin';
             }
-        }
+        }*/
           
         // Render Statistik Publik (Pie Chart & Horizontal Bar Chart)
         async function loadPublicStats() {
