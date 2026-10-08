@@ -419,8 +419,8 @@
         // let voterData = { nama: '', angkatan: '', kelas: '' };
         // let databaseMurid = {};
         // let logoClickCount = 0;
-        let pieChartInstance = null;
-        let barChartInstance = null;
+        //let pieChartInstance = null;
+        //let barChartInstance = null;
 
         // Load data.txt saat halaman dimuat
         window.addEventListener('DOMContentLoaded', async () => {
@@ -728,6 +728,14 @@ async function loadPublicStats() {
     }
 
     const ctxPie = document.getElementById('chart-overall-pie').getContext('2d');
+    // Cek apakah total semua suara masih 0
+const totalSuara = totalData.reduce((a, b) => a + b, 0);
+
+if (totalSuara === 0) {
+    document.getElementById('chart-overall-pie').parentElement.innerHTML = 
+        '<div class="text-center py-10 text-gray-500 font-semibold"><i class="fa-solid fa-inbox text-3xl mb-2 block"></i>Belum ada suara yang masuk</div>';
+} else {
+    // Jalankan Chart.js seperti biasa
     if (pieChartInstance) pieChartInstance.destroy();
 
     pieChartInstance = new Chart(ctxPie, {
@@ -751,6 +759,7 @@ async function loadPublicStats() {
             }
         }
     });
+}
 }
         // Hidden Admin Trigger (Klik Logo 3x)
         /* function handleLogoClick() {
