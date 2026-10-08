@@ -78,9 +78,9 @@ export default {
                     `SELECT pilih_nomor_berapa, COUNT(*) as total FROM voting_results GROUP BY pilih_nomor_berapa`
                 ).all();
 
-                const { results: angkatan } = await env.DB.prepare(
+                /*const { results: angkatan } = await env.DB.prepare(
                     `SELECT angkatan, pilih_nomor_berapa, COUNT(*) as total FROM voting_results GROUP BY angkatan, pilih_nomor_berapa`
-                ).all();
+                ).all();*/
 
                 return jsonResponse({ total, angkatan });
             } catch (err) {
