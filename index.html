@@ -336,7 +336,7 @@
     <footer class="bg-mbBlueDark text-blue-200 py-6 border-t border-blue-900 text-center text-xs mt-auto">
         <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
             <p>© SMA Mutiara Bangsa 1 - Pilketos Digital System</p>
-            <<!-- button onclick="openAdminModal()" class="text-blue-400 hover:text-white transition text-xs flex items-center gap-1 opacity-60 hover:opacity-100">
+            <!-- <button onclick="openAdminModal()" class="text-blue-400 hover:text-white transition text-xs flex items-center gap-1 opacity-60 hover:opacity-100">
                 <i class="fa-solid fa-lock text-[10px]"></i> Admin
             </button> -->
         </div>
@@ -724,6 +724,7 @@ async function loadPublicStats() {
             });
         }
     } catch (e) {
+        alert (`gagal mengambil data statistik ${e}`);
         console.error("Gagal mengambil data statistik", e);
     }
 
