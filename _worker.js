@@ -208,7 +208,7 @@ export default {
                 return jsonResponse({ success: false, message: err.message }, 500);
             }
         }
-        if (path === "/api/admin/login" && method === "POST") {
+        /*if (path === "/api/admin/login" && method === "POST") {
             try {
                 const { username, password } = await request.json();
                 if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
@@ -218,7 +218,7 @@ export default {
             } catch (err) {
                 return jsonResponse({ success: false, message: err.message }, 500);
             }
-        }
+        }*/
 
         // 3. API STATISTIK PUBLIK (/api/stats/public)
         /*if (path === "/api/stats/public" && method === "GET") {
