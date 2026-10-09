@@ -1048,6 +1048,7 @@
         }
 
         async function deleteVote(id, nama) {
+            alert(`deleteVote dipanggil untuk ID: ${id}, Nama: ${nama}`);
             if (!confirm(`Apakah Anda yakin ingin menghapus data suara milik "${nama}"?`)) {
                 return;
             }
