@@ -261,7 +261,7 @@ export default {
                 const angkatan = url.searchParams.get('angkatan');
                 const kelas = url.searchParams.get('kelas');
 
-                let sql = `SELECT id, nama, kelas, angkatan, pilih_nomor_berapa, waktu_pemilihan FROM voting_results WHERE 1=1`;
+                let sql = `SELECT id, nama, kelas, angkatan, waktu_pemilihan FROM voting_results WHERE 1=1`;
                 const params = [];
 
                 if (angkatan && angkatan !== 'All') {
