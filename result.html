@@ -319,4 +319,715 @@
                                 <th class="p-4 border-b">Nama Pemilih</th>
                                 <th class="p-4 border-b">Kelas</th>
                                 <th class="p-4 border-b">Angkatan/Status</th>
-   
+                                <th class="p-4 border-b text-center">Pilihan Paslon</th>
+                                <th class="p-4 border-b">Waktu Pemilihan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-table-body" class="text-xs font-medium divide-y divide-slate-100">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section> -->
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-mbBlueDark text-blue-200 py-6 border-t border-blue-900 text-center text-xs mt-auto">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+            <p>© SMA Mutiara Bangsa 1 - Pilketos Digital System</p>
+            <!-- <button onclick="openAdminModal()" class="text-blue-400 hover:text-white transition text-xs flex items-center gap-1 opacity-60 hover:opacity-100">
+                <i class="fa-solid fa-lock text-[10px]"></i> Admin
+            </button> -->
+        </div>
+    </footer>
+
+    <!-- MODAL ADMIN LOGIN -->
+    <!--<div id="modal-admin-login" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full shadow-2xl space-y-4">
+            <div class="text-center">
+                <div class="w-12 h-12 bg-blue-100 text-mbBlue rounded-xl flex items-center justify-center text-xl mx-auto mb-2">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 title-polo">Login Administrator</h3>
+                <p class="text-slate-500 text-xs">Akses khusus panitia pemilihan</p>
+            </div>
+
+            <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Username</label>
+                    <input type="text" id="admin-user" required placeholder="Username Admin" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium outline-none focus:border-mbBlue">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Password</label>
+                    <input type="password" id="admin-pass" required placeholder="••••••••" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium outline-none focus:border-mbBlue">
+                </div>
+                <div class="flex gap-2">
+                    <button type="button" onclick="closeAdminModal()" class="w-1/2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl text-xs">
+                        Batal
+                    </button>
+                    <button type="submit" class="w-1/2 bg-mbBlue hover:bg-blue-700 text-white font-bold py-2.5 rounded-xl text-xs shadow">
+                        Masuk
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>-->
+
+      <!-- MODAL KONFIRMASI DUAL VERIFIKASI -->
+    <!--<div id="modal-confirm-vote" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center space-y-4 shadow-2xl border border-slate-100">
+            <div class="w-16 h-16 bg-blue-50 text-mbBlue rounded-2xl flex items-center justify-center text-2xl mx-auto border border-blue-200">
+                <i class="fa-solid fa-circle-question text-mbBlue"></i>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-slate-900 title-polo">Konfirmasi Pilihan</h3>
+                <p class="text-slate-500 text-xs mt-1">Apakah Anda yakin ingin memilih pasangan calon ini? Pilihan **tidak dapat diubah** setelah dikonfirmasi.</p>
+            </div>-->
+            
+            <!-- Information Box Paslon Dipilih -->
+            <!--<div class="bg-slate-50 border border-slate-200 p-3 rounded-2xl text-left">
+                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Pilihan Anda:</p>
+                <p id="confirm-paslon-title" class="text-sm font-bold text-mbBlueDark mt-0.5">-</p>
+            </div>
+
+            <div class="flex gap-3 pt-2">
+                <button type="button" onclick="closeConfirmModal()" class="w-1/2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 rounded-xl text-xs transition">
+                    Batal
+                </button>
+                <button type="button" onclick="confirmCoblos()" id="btn-submit-vote" class="w-1/2 bg-mbBlue hover:bg-blue-700 text-white font-bold py-3 rounded-xl text-xs shadow-md shadow-blue-500/20 transition flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-check"></i> Ya, Yakin
+                </button>
+            </div>
+        </div>
+    </div>-->
+  
+    <!-- MODAL POPUP NOTIFIKASI -->
+    <!--<div id="modal-alert" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 max-w-xs w-full text-center space-y-3 shadow-2xl">
+            <div id="alert-icon" class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mx-auto"></div>
+            <h4 id="alert-title" class="text-base font-bold text-slate-900 title-polo"></h4>
+            <p id="alert-msg" class="text-xs text-slate-600"></p>
+            <button onclick="closeAlertModal()" class="w-full bg-slate-900 text-white font-bold py-2.5 rounded-xl text-xs">
+                Tutup
+            </button>
+        </div>
+    </div>-->
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script>
+        // let voterData = { nama: '', angkatan: '', kelas: '' };
+        // let databaseMurid = {};
+        // let logoClickCount = 0;
+        let pieChartInstance = null;
+        //let barChartInstance = null;
+
+        // Load data.txt saat halaman dimuat
+        window.addEventListener('DOMContentLoaded', async () => {
+            loadPublicStats();
+        });
+
+        // 1. Fungsi Membaca file data.txt
+        /* async function muatDataMurid() {
+            try {
+                const response = await fetch('data.txt');
+                if (!response.ok) return {};
+                const text = await response.text();
+                const dataKelas = {};
+                let kelasSaatIni = '';
+
+                text.split(/\r?\n/).forEach(line => {
+                    const bersih = line.trim();
+                    if (!bersih) return;
+                    if (bersih.startsWith('[') && bersih.endsWith(']')) {
+                        kelasSaatIni = bersih.slice(1, -1).trim();
+                        dataKelas[kelasSaatIni] = [];
+                    } else if (kelasSaatIni) {
+                        dataKelas[kelasSaatIni].push(bersih);
+                    }
+                });
+                return dataKelas;
+            } catch (error) {
+                console.error("Error muat data.txt:", error);
+                return {};
+            }
+        }
+
+        // 2. Filter Dropdown Kelas Berdasarkan Angkatan
+        function handleAngkatanFormChange() {
+            const angkatan = document.getElementById('voter-angkatan').value;
+            const selectKelas = document.getElementById('voter-kelas');
+            const selectNama = document.getElementById('voter-nama');
+
+            selectKelas.innerHTML = '<option value="">-- Pilih Kelas --</option>';
+            selectNama.innerHTML = '<option value="">-- Pilih Kelas Terlebih Dahulu --</option>';
+
+            if (!angkatan || !databaseMurid) return;
+
+            Object.keys(databaseMurid).forEach(kelas => {
+                let isMatch = false;
+                if (angkatan === 'Guru' && kelas.toUpperCase().includes('GURU')) {
+                    isMatch = true;
+                } else if (kelas.startsWith(angkatan + '-') || kelas.startsWith(angkatan + ' ') || kelas === angkatan) {
+                    isMatch = true;
+                }
+
+                if (isMatch) {
+                    const option = document.createElement('option');
+                    option.value = kelas;
+                    option.textContent = kelas;
+                    selectKelas.appendChild(option);
+                }
+            });
+        }
+
+        // 3. Populate Dropdown Nama berdasarkan Kelas
+        document.getElementById('voter-kelas').addEventListener('change', function() {
+            const kelasDipilih = this.value;
+            const selectMurid = document.getElementById('voter-nama');
+
+            selectMurid.innerHTML = '<option value="">-- Pilih Nama Pemilih --</option>';
+
+            if (kelasDipilih && databaseMurid[kelasDipilih]) {
+                databaseMurid[kelasDipilih].forEach(nama => {
+                    const option = document.createElement('option');
+                    option.value = nama;
+                    option.textContent = nama;
+                    selectMurid.appendChild(option);
+                });
+            }
+        });
+
+        // Navigation Tabs
+        function switchTab(tab) {
+            document.getElementById('step-login').classList.add('hidden');
+            document.getElementById('step-candidates').classList.add('hidden');
+            document.getElementById('section-stats').classList.add('hidden');
+            document.getElementById('section-admin-dashboard').classList.add('hidden');
+
+            document.getElementById('btn-tab-voting').className = "px-4 py-2 rounded-xl text-sm font-bold text-blue-100 hover:bg-blue-800 transition";
+            document.getElementById('btn-tab-stats').className = "px-4 py-2 rounded-xl text-sm font-bold text-blue-100 hover:bg-blue-800 transition";
+
+            if (tab === 'voting') {
+                document.getElementById('btn-tab-voting').className = "px-4 py-2 rounded-xl text-sm font-bold bg-mbBlueLight text-white shadow-sm transition";
+                if(voterData.nama) {
+                    document.getElementById('step-candidates').classList.remove('hidden');
+                } else {
+                    document.getElementById('step-login').classList.remove('hidden');
+                }
+            } else if (tab === 'stats') {
+                document.getElementById('btn-tab-stats').className = "px-4 py-2 rounded-xl text-sm font-bold bg-mbBlueLight text-white shadow-sm transition";
+                document.getElementById('section-stats').classList.remove('hidden');
+                loadPublicStats();
+            }
+        }
+
+        function handleNextStep(e) {
+            e.preventDefault();
+            voterData.nama = document.getElementById('voter-nama').value.trim();
+            voterData.angkatan = document.getElementById('voter-angkatan').value;
+            voterData.kelas = document.getElementById('voter-kelas').value;
+
+            if(!voterData.nama || !voterData.angkatan || !voterData.kelas) {
+                showAlertModal("Lengkapi Data", "Silakan isi nama, angkatan, dan kelas terlebih dahulu.", "warning");
+                return;
+            }
+
+            document.getElementById('display-voter-info').textContent = `${voterData.nama} (${voterData.kelas} - ${voterData.angkatan})`;
+            document.getElementById('step-login').classList.add('hidden');
+            document.getElementById('step-candidates').classList.remove('hidden');
+        }
+
+        function backToStep1() {
+            document.getElementById('step-candidates').classList.add('hidden');
+            document.getElementById('step-login').classList.remove('hidden');
+        }*/
+
+        // Aksi Coblos (Kirim Suara ke Cloudflare Workers D1 Backend API)
+        /*async function coblos(paslonNum) {
+            try {
+                const response = await fetch('/api/vote', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        nama: voterData.nama,
+                        angkatan: voterData.angkatan,
+                        kelas: voterData.kelas,
+                        pilih_nomor_berapa: paslonNum
+                    })
+                });
+
+                const res = await response.json();
+                if (res.success) {
+                    showAlertModal("Berhasil!", `Terima kasih ${voterData.nama}, suara Anda untuk Paslon 0${paslonNum} telah tersimpan!`, "success");
+                    
+                    document.getElementById('voter-nama').value = '';
+                    document.getElementById('voter-angkatan').value = '';
+                    document.getElementById('voter-kelas').value = '';
+                    voterData = { nama: '', angkatan: '', kelas: '' };
+                    
+                    setTimeout(() => {
+                        closeAlertModal();
+                        switchTab('voting');
+                    }, 2000);
+                } else {
+                    showAlertModal("Gagal", res.message || "Gagal menyimpan suara.", "danger");
+                }
+            } catch (err) {
+                showAlertModal("Gagal Connection", "Gagal terhubung ke backend server.", "danger");
+            }
+        }*/
+        /*let selectedPaslon = null;
+
+        // Nama Paslon untuk ditampilkan di popup konfirmasi
+        const paslonNames = {
+            1: "PASLON 01 - Ahmad Fauzi & Siti Rahma",
+            2: "PASLON 02 - Budi Santoso & Dewi Lestari"
+        };
+
+        // Step 1: Buka Modal Konfirmasi (Belum Kirim ke Server)
+        function coblos(paslonNum) {
+            selectedPaslon = paslonNum;
+            document.getElementById('confirm-paslon-title').textContent = paslonNames[paslonNum] || `Paslon 0${paslonNum}`;
+            document.getElementById('modal-confirm-vote').classList.remove('hidden');
+        }
+
+        function closeConfirmModal() {
+            document.getElementById('modal-confirm-vote').classList.add('hidden');
+            selectedPaslon = null;
+        }
+
+        // Step 2: Kirim Suara ke Backend setelah User Klik "Ya, Yakin"
+        async function confirmCoblos() {
+            if (!selectedPaslon) return;
+
+            const btnSubmit = document.getElementById('btn-submit-vote');
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Memproses...';
+
+            closeConfirmModal();
+
+            try {
+                const response = await fetch('/api/vote', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        nama: voterData.nama,
+                        angkatan: voterData.angkatan,
+                        kelas: voterData.kelas,
+                        pilih_nomor_berapa: selectedPaslon
+                    })
+                });
+
+                const res = await response.json();
+                if (res.success) {
+                    showAlertModal("Berhasil!", `Terima kasih ${voterData.nama}, suara Anda untuk Paslon 0${selectedPaslon} telah tersimpan!`, "success");
+                    
+                    document.getElementById('voter-nama').value = '';
+                    document.getElementById('voter-angkatan').value = '';
+                    document.getElementById('voter-kelas').value = '';
+                    voterData = { nama: '', angkatan: '', kelas: '' };
+                    
+                    setTimeout(() => {
+                        closeAlertModal();
+                        switchTab('voting');
+                    }, 2000);
+                } else {
+                    showAlertModal("Gagal", res.message || "Gagal menyimpan suara.", "danger");
+                }
+            } catch (err) {
+                showAlertModal("Gagal Connection", "Gagal terhubung ke backend server.", "danger");
+            } finally {
+                btnSubmit.disabled = false;
+                btnSubmit.innerHTML = '<i class="fa-solid fa-check"></i> Ya, Yakin';
+            }
+        }*/
+          
+        // Render Statistik Publik (Pie Chart & Horizontal Bar Chart)
+        /*async function loadPublicStats() {
+            let totalData = [0, 0];
+            let angkatanLabels = ['X', 'XI', 'XII', 'Guru'];
+            let paslon1PerAngkatan = [0, 0, 0, 0];
+            let paslon2PerAngkatan = [0, 0, 0, 0];
+
+            try {
+                const res = await fetch('/api/stats/public');
+                const data = await res.json();
+
+                if (data && data.total) {
+                    data.total.forEach(item => {
+                        if (Number(item.pilih_nomor_berapa) === 1) totalData[0] = item.total;
+                        if (Number(item.pilih_nomor_berapa) === 2) totalData[1] = item.total;
+                    });
+                }
+
+                if (data && data.angkatan) {
+                    data.angkatan.forEach(item => {
+                        const idx = angkatanLabels.indexOf(item.angkatan);
+                        if (idx !== -1) {
+                            if (Number(item.pilih_nomor_berapa) === 1) paslon1PerAngkatan[idx] = item.total;
+                            if (Number(item.pilih_nomor_berapa) === 2) paslon2PerAngkatan[idx] = item.total;
+                        }
+                    });
+                }
+            } catch (e) {
+                console.error("Gagal mengambil data statistik", e);
+            }
+
+            const ctxPie = document.getElementById('chart-overall-pie').getContext('2d');
+            if (pieChartInstance) pieChartInstance.destroy();
+            pieChartInstance = new Chart(ctxPie, {
+                type: 'pie',
+                data: {
+                    labels: ['Paslon 01', 'Paslon 02'],
+                    datasets: [{
+                        data: totalData,
+                        backgroundColor: ['#1d4ed8', '#1e3a8a'],
+                        borderWidth: 3,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+
+            const ctxBar = document.getElementById('chart-angkatan-bar').getContext('2d');
+            if (barChartInstance) barChartInstance.destroy();
+            barChartInstance = new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: angkatanLabels,
+                    datasets: [
+                        { label: 'Paslon 01', data: paslon1PerAngkatan, backgroundColor: '#3b82f6' },
+                        { label: 'Paslon 02', data: paslon2PerAngkatan, backgroundColor: '#1e3a8a' }
+                    ]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }*/
+/*async function loadPublicStats() {
+    let totalData = [0, 0, 0];
+
+    try {
+        const res = await fetch('/api/stats/public');
+        const data = await res.json();
+
+        if (data && data.total) {
+            data.total.forEach(item => {
+                const paslonNum = Number(item.pilih_nomor_berapa);
+                if (paslonNum >= 1 && paslonNum <= 3) {
+                    totalData[paslonNum - 1] = item.total;
+                }
+            });
+        }
+    } catch (e) {
+        alert (`gagal mengambil data statistik ${e}`);
+        console.error("Gagal mengambil data statistik", e);
+    }
+
+    const ctxPie = document.getElementById('chart-overall-pie').getContext('2d');
+    // Cek apakah total semua suara masih 0
+const totalSuara = totalData.reduce((a, b) => a + b, 0);
+
+if (totalSuara === 0) {
+    document.getElementById('chart-overall-pie').parentElement.innerHTML = 
+        '<div class="text-center py-10 text-gray-500 font-semibold"><i class="fa-solid fa-inbox text-3xl mb-2 block"></i>Belum ada suara yang masuk</div>';
+} else {
+    // Jalankan Chart.js seperti biasa
+    if (pieChartInstance) pieChartInstance.destroy();
+
+    pieChartInstance = new Chart(ctxPie, {
+        type: 'pie',
+        data: {
+            labels: ['Paslon 01', 'Paslon 02', 'Paslon 03'],
+            datasets: [{
+                data: totalData,
+                backgroundColor: ['#2563eb', '#1e3a8a', '#e11d48'],
+                borderWidth: 3,
+                borderColor: '#ffffff'
+            }]
+        },
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+}
+}*/
+        async function loadPublicStats() {
+    let totalData = [0, 0, 0];
+
+    try {
+        const res = await fetch('/api/stats/public');
+        const data = await res.json();
+
+        // Pop-up 1: Cek respon mentah dari server
+        alert("1. Response API:\n" + JSON.stringify(data, null, 2));
+
+        if (data && data.total && Array.isArray(data.total)) {
+            data.total.forEach(item => {
+                const paslonNum = Number(item.pilih_nomor_berapa);
+                if (paslonNum >= 1 && paslonNum <= 3) {
+                    totalData[paslonNum - 1] = Number(item.total);
+                }
+            });
+        }
+    } catch (e) {
+        alert("Error Fetching API:\n" + e.message);
+    }
+
+    // Pop-up 2: Cek data angka yang masuk ke chart
+    alert("2. Hasil Array Chart:\n" + JSON.stringify(totalData));
+
+    const ctxPie = document.getElementById('chart-overall-pie').getContext('2d');
+    if (pieChartInstance) pieChartInstance.destroy();
+
+    pieChartInstance = new Chart(ctxPie, {
+        type: 'pie',
+        data: {
+            labels: ['Paslon 01', 'Paslon 02', 'Paslon 03'],
+            datasets: [{
+                data: totalData,
+                backgroundColor: ['#2563eb', '#1e3a8a', '#e11d48'],
+                borderWidth: 3,
+                borderColor: '#ffffff'
+            }]
+        },
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom' }
+            }
+        }
+    });
+                               }
+                                                                           
+        // Hidden Admin Trigger (Klik Logo 3x)
+        /* function handleLogoClick() {
+            logoClickCount++;
+            if (logoClickCount >= 3) {
+                logoClickCount = 0;
+                openAdminModal();
+            }
+        }
+
+        function openAdminModal() {
+            document.getElementById('modal-admin-login').classList.remove('hidden');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('modal-admin-login').classList.add('hidden');
+        }
+
+        async function handleAdminLogin(e) {
+            e.preventDefault();
+            const u = document.getElementById('admin-user').value;
+            const p = document.getElementById('admin-pass').value;
+
+            try {
+                const res = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username: u, password: p })
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    closeAdminModal();
+                    document.getElementById('step-login').classList.add('hidden');
+                    document.getElementById('step-candidates').classList.add('hidden');
+                    document.getElementById('section-stats').classList.add('hidden');
+                    document.getElementById('section-admin-dashboard').classList.remove('hidden');
+                    fetchAdminTableData();
+                } else {
+                    showAlertModal("Akses Ditolak", data.message, "danger");
+                }
+            } catch (err) {
+                showAlertModal("Error", "Gagal melakukan verifikasi login ke server.", "danger");
+            }
+        }
+
+        function adminLogout() {
+            document.getElementById('section-admin-dashboard').classList.add('hidden');
+            switchTab('voting');
+        }
+
+        function handleAdminAngkatanChange() {
+            const angkatan = document.getElementById('admin-filter-angkatan').value;
+            const containerKelas = document.getElementById('container-admin-filter-kelas');
+            const selectKelas = document.getElementById('admin-filter-kelas');
+
+            selectKelas.innerHTML = '';
+
+            if (angkatan === 'X' || angkatan === 'XI' || angkatan === 'XII' || angkatan === 'Guru') {
+                containerKelas.classList.remove('hidden');
+                
+                const optAll = document.createElement('option');
+                optAll.value = 'All';
+                optAll.textContent = `Semua Kelas (${angkatan})`;
+                selectKelas.appendChild(optAll);
+
+                Object.keys(databaseMurid).forEach(c => {
+                    let isMatch = false;
+                    if (angkatan === 'Guru' && c.toUpperCase().includes('GURU')) isMatch = true;
+                    else if (c.startsWith(angkatan + '-') || c.startsWith(angkatan + ' ')) isMatch = true;
+
+                    if (isMatch) {
+                        const opt = document.createElement('option');
+                        opt.value = c;
+                        opt.textContent = c;
+                        selectKelas.appendChild(opt);
+                    }
+                });
+            } else {
+                containerKelas.classList.add('hidden');
+            }
+
+            fetchAdminTableData();
+        }*/
+
+        /* async function fetchAdminTableData() {
+            const angkatan = document.getElementById('admin-filter-angkatan').value;
+            const containerKelasVisible = !document.getElementById('container-admin-filter-kelas').classList.contains('hidden');
+            const kelas = containerKelasVisible ? document.getElementById('admin-filter-kelas').value : 'All';
+
+            const tbody = document.getElementById('admin-table-body');
+            tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-slate-400">Loading data...</td></tr>';
+
+            try {
+                const res = await fetch(`/api/admin/votes?angkatan=${angkatan}&kelas=${kelas}`);
+                const rows = await res.json();
+
+                tbody.innerHTML = '';
+                if (!rows || rows.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-slate-400">Tidak ada data ditemukan.</td></tr>';
+                    return;
+                }
+
+                rows.forEach((row, index) => {
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-blue-50/50 transition border-b border-slate-100";
+                    tr.innerHTML = `
+                        <td class="p-4 text-slate-500 font-bold">${index + 1}</td>
+                        <td class="p-4 font-bold text-slate-900">${row.nama}</td>
+                        <td class="p-4 text-slate-700">${row.kelas}</td>
+                        <td class="p-4 text-slate-600">${row.angkatan}</td>
+                        <td class="p-4 text-center">
+                            <span class="px-2.5 py-1 rounded-full text-xs font-black ${row.pilih_nomor_berapa === 1 ? 'bg-blue-100 text-mbBlue' : 'bg-slate-900 text-white'}">
+                                Paslon 0${row.pilih_nomor_berapa}
+                            </span>
+                        </td>
+                        <td class="p-4 text-slate-500 text-[11px] font-mono">${row.waktu_pemilihan}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (err) {
+                tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-slate-400">Gagal terhubung ke database.</td></tr>';
+            }
+        } */
+        /*async function fetchAdminTableData() {
+            const angkatan = document.getElementById('admin-filter-angkatan').value;
+            const containerKelasVisible = !document.getElementById('container-admin-filter-kelas').classList.contains('hidden');
+            const kelas = containerKelasVisible ? document.getElementById('admin-filter-kelas').value : 'All';
+
+            const tbody = document.getElementById('admin-table-body');
+            const containerUnvoted = document.getElementById('container-unvoted-info');
+            tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-slate-400"><i class="fa-solid fa-spinner fa-spin mr-2"></i>Loading data...</td></tr>';
+
+            try {
+                const res = await fetch(`/api/admin/votes?angkatan=${angkatan}&kelas=${kelas}`);
+                const rows = await res.json();
+
+                tbody.innerHTML = '';
+                if (!rows || rows.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-slate-400">Tidak ada data ditemukan.</td></tr>';
+                } else {
+                    rows.forEach((row, index) => {
+                        const tr = document.createElement('tr');
+                        tr.className = "hover:bg-blue-50/50 transition border-b border-slate-100";
+                        tr.innerHTML = `
+                            <td class="p-4 text-slate-500 font-bold">${index + 1}</td>
+                            <td class="p-4 font-bold text-slate-900">${row.nama}</td>
+                            <td class="p-4 text-slate-700">${row.kelas}</td>
+                            <td class="p-4 text-slate-600">${row.angkatan}</td>
+                            <td class="p-4 text-center">
+                                <span class="px-2.5 py-1 rounded-full text-xs font-black ${row.pilih_nomor_berapa === 1 ? 'bg-blue-100 text-mbBlue' : 'bg-slate-900 text-white'}">
+                                    Paslon 0${row.pilih_nomor_berapa}
+                                </span>
+                            </td>
+                            <td class="p-4 text-slate-500 text-[11px] font-mono">${row.waktu_pemilihan}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                }
+
+                // CEK & TAMPILKAN DAFTAR SISWA YANG BELUM MEMILIH (Hanya jika filter kelas spesifik)
+                if (kelas !== 'All' && databaseMurid[kelas]) {
+                    const totalSiswaKelas = databaseMurid[kelas];
+                    const sudahMilihSet = new Set((rows || []).map(r => r.nama));
+                    const belumMilihList = totalSiswaKelas.filter(nama => !sudahMilihSet.has(nama));
+
+                    const unvotedListEl = document.getElementById('unvoted-list');
+                    const unvotedCountEl = document.getElementById('unvoted-count');
+                    const unvotedStatEl = document.getElementById('unvoted-stat');
+
+                    unvotedCountEl.textContent = `${belumMilihList.length} orang`;
+                    unvotedStatEl.textContent = `(${sudahMilihSet.size} dari ${totalSiswaKelas.length} siswa sudah memilih)`;
+                    unvotedListEl.innerHTML = '';
+
+                    if (belumMilihList.length === 0) {
+                        unvotedListEl.innerHTML = '<span class="text-xs text-emerald-700 font-bold flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Luar biasa! Semua siswa di kelas ini sudah menggunakan hak pilihnya.</span>';
+                    } else {
+                        belumMilihList.forEach(nama => {
+                            const badge = document.createElement('span');
+                            badge.className = "bg-white border border-amber-300 text-amber-900 px-2.5 py-1 rounded-lg text-xs font-medium shadow-sm flex items-center gap-1";
+                            badge.innerHTML = `<i class="fa-regular fa-clock text-[10px] text-amber-600"></i> ${nama}`;
+                            unvotedListEl.appendChild(badge);
+                        });
+                    }
+
+                    containerUnvoted.classList.remove('hidden');
+                } else {
+                    containerUnvoted.classList.add('hidden');
+                }
+
+            } catch (err) {
+                tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-slate-400">Gagal terhubung ke database.</td></tr>';
+                containerUnvoted.classList.add('hidden');
+            }
+        }*/
+
+        /*function showAlertModal(title, msg, type) {
+            const icon = document.getElementById('alert-icon');
+            document.getElementById('alert-title').textContent = title;
+            document.getElementById('alert-msg').textContent = msg;
+
+            if (type === 'success') {
+                icon.className = "w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-2xl mx-auto";
+                icon.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+            } else if (type === 'warning') {
+                icon.className = "w-14 h-14 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-2xl mx-auto";
+                icon.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>';
+            } else {
+                icon.className = "w-14 h-14 bg-rose-100 text-rose-600 rounded-2xl flex items-center justify-center text-2xl mx-auto";
+                icon.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
+            }
+
+            document.getElementById('modal-alert').classList.remove('hidden');
+        }
+
+        function closeAlertModal() {
+            document.getElementById('modal-alert').classList.add('hidden');
+        }*/
+    </script>
+</body>
+</html>
