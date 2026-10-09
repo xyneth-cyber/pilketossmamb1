@@ -307,7 +307,7 @@ export default {
                     return jsonResponse({ success: false, message: "ID data tidak ditemukan" }, 400);
                 }
 
-                await env.DB.prepare(`DELETE FROM voting_results WHERE id = ?`).bind(id).run();
+                await env.DB.prepare(`DELETE FROM voting_results WHERE rowid = ?`).bind(id).run();
 
                 return jsonResponse({ 
                     success: true, 
