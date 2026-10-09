@@ -468,6 +468,16 @@
             }
         });
 
+        // document.addEventListener('keyup', function(event) {
+        //     // Cek apakah tombol yang dilepas adalah 'a' atau 'A'
+        //     if (event.key.toLowerCase() === 'a') {
+        //         document.getElementById('step-login').classList.add('hidden');
+        //         document.getElementById('step-candidates').classList.add('hidden');
+        //         document.getElementById('section-admin-dashboard').classList.remove('hidden');
+        //         fetchAdminTableData();
+        //     }
+        // });
+
         // 1. Fungsi Membaca file data.txt
         async function muatDataMurid() {
             try {
@@ -787,6 +797,8 @@
             e.preventDefault();
             const u = document.getElementById('admin-user').value;
             const p = document.getElementById('admin-pass').value;
+            alert ('adminusr: ' + u);
+            alert ('adminpass: ' + p);
 
             try {
                 const res = await fetch('/api/admin/login', {
@@ -800,7 +812,6 @@
                     closeAdminModal();
                     document.getElementById('step-login').classList.add('hidden');
                     document.getElementById('step-candidates').classList.add('hidden');
-                    document.getElementById('section-stats').classList.add('hidden');
                     document.getElementById('section-admin-dashboard').classList.remove('hidden');
                     fetchAdminTableData();
                 } else {
