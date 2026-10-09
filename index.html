@@ -1002,7 +1002,7 @@
                             <td class="p-4 text-slate-600">${row.angkatan}</td>
                             <td class="p-4 text-slate-500 text-[11px] font-mono">${row.waktu_pemilihan || '-'}</td>
                             <td class="p-4 text-center">
-                                <button onclick="deleteVote(${row.id}, '${row.nama}')" class="bg-rose-100 text-rose-600 hover:bg-rose-600 hover:text-white px-2.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1 mx-auto shadow-sm active:scale-95">
+                                <button onclick="deleteVote(${row.rowid}, '${row.nama}')" class="bg-rose-100 text-rose-600 hover:bg-rose-600 hover:text-white px-2.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1 mx-auto shadow-sm active:scale-95">
                                     <i class="fa-solid fa-trash-can"></i>
                                 </button>
                             </td>
