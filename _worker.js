@@ -194,11 +194,11 @@ export default {
         }
 
         // 2. API LOGIN ADMIN (/api/admin/login)
-        /*if (path === "/api/admin/login" && method === "POST") {
+        if (path === "/api/admin/login" && method === "POST") {
             try {
                 const { username, password } = await request.json();
-                const adminUser = env.ADMIN_USERNAME || "admin";
-                const adminPass = env.ADMIN_PASSWORD || "admin123";
+                const adminUser = env.ADMIN_USERNAME || "adminmb1";
+                const adminPass = env.ADMIN_PASSWORD || "AdminLogin";
 
                 if (username === adminUser && password === adminPass) {
                     return jsonResponse({ success: true, token: "session-admin-authorized" });
@@ -207,7 +207,7 @@ export default {
             } catch (err) {
                 return jsonResponse({ success: false, message: err.message }, 500);
             }
-        }*/
+        }
         if (path === "/api/admin/login" && method === "POST") {
             try {
                 const { username, password } = await request.json();
