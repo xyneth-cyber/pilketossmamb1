@@ -9,9 +9,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- chartjs-plugin-datalabels@2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <!-- FontAwesome Icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Logo -->
+    <!-- App Logo -->
     <link rel="icon" href="logo.png">
 
     <script>
@@ -63,7 +65,7 @@
                         <h1 class="text-xl font-bold tracking-tight title-polo">
                             SMA Mutiara Bangsa 1
                         </h1>
-                        <p class="text-xs text-blue-200 font-medium">Sistem Pemilihan Ketua OSIS Digital</p>
+                        <p class="text-xs text-blue-200 font-medium">Voting Result</p>
                     </div>
                 </div>
             </div>
@@ -82,14 +84,51 @@
                     <p class="text-slate-500 text-xs mt-1">Perolehan suara secara keseluruhan</p>
                 </div>
 
-                <div class="grid lg:grid-cols-1 gap-8">
+                <!-- [DIUBAH] Grid diubah menjadi 2 kolom (Kiri: Chart, Kanan: Tabel) -->
+                <div class="grid lg:grid-cols-2 gap-8 items-center">
+                    <!-- KOLOM KIRI: PIE CHART -->
                     <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 flex flex-col items-center">
                         <h3 class="font-bold text-slate-800 text-sm mb-4 text-center">🏆 Total Perolehan Suara Keseluruhan</h3>
                         <div class="w-full h-64 relative flex items-center justify-center">
                             <canvas id="chart-overall-pie"></canvas>
                         </div>
                     </div>
-                  </div>
+
+                    <!-- [BARU] KOLOM KANAN: TABEL REKAPITULASI PASLON -->
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                        <h3 class="font-bold text-slate-800 text-sm mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-list-ol text-mbBlue"></i> Rincian Suara Paslon
+                        </h3>
+                        <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+                            <table class="w-full text-sm text-left">
+                                <thead class="text-xs uppercase bg-slate-100 text-slate-700 border-b border-slate-200">
+                                    <tr>
+                                        <th class="px-4 py-3 text-center w-16">No</th>
+                                        <th class="px-4 py-3">Nama Paslon</th>
+                                        <th class="px-4 py-3 text-right">Total Suara</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 font-medium text-slate-800">
+                                    <tr class="hover:bg-blue-50/50 transition">
+                                        <td class="px-4 py-3.5 text-center font-bold text-blue-600">01</td>
+                                        <td class="px-4 py-3.5 font-semibold">Giceline Nicole & Louie Isaac</td>
+                                        <td class="px-4 py-3.5 text-right font-bold text-slate-900" id="table-paslon-1">0 suara</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/50 transition">
+                                        <td class="px-4 py-3.5 text-center font-bold text-blue-800">02</td>
+                                        <td class="px-4 py-3.5 font-semibold">Veda Valencia & Lyora Junietta</td>
+                                        <td class="px-4 py-3.5 text-right font-bold text-slate-900" id="table-paslon-2">0 suara</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/50 transition">
+                                        <td class="px-4 py-3.5 text-center font-bold text-blue-950">03</td>
+                                        <td class="px-4 py-3.5 font-semibold">Joenatan Winata & Miguel Julian</td>
+                                        <td class="px-4 py-3.5 text-right font-bold text-slate-900" id="table-paslon-3">0 suara</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -135,6 +174,11 @@
                 alert("Error Fetching API:\n" + e.message);
             }
 
+            // [BARU] Update Nilai Angka di Tabel Samping
+            document.getElementById('table-paslon-1').textContent = `${totalData[0]} suara`;
+            document.getElementById('table-paslon-2').textContent = `${totalData[1]} suara`;
+            document.getElementById('table-paslon-3').textContent = `${totalData[2]} suara`;
+
             // Pop-up 2: Cek data angka yang masuk ke chart
             //alert("2. Hasil Array Chart:\n" + JSON.stringify(totalData));
 
@@ -143,11 +187,12 @@
 
             pieChartInstance = new Chart(ctxPie, {
                 type: 'pie',
+                plugins: [ChartDataLabels],
                 data: {
                     labels: ['Paslon 01', 'Paslon 02', 'Paslon 03'],
                     datasets: [{
                         data: totalData,
-                        backgroundColor: ['#2563eb', '#1d4ed8', '#1e3a8a'],
+                        backgroundColor: ['#fdc607', '#1d4ed8', '#c51f1a'],
                         borderWidth: 3,
                         borderColor: '#ffffff'
                     }]
@@ -156,7 +201,21 @@
                     responsive: true, 
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'bottom' }
+                        legend: { position: 'bottom' },
+                        // [BARU] Konfigurasi Tampilan Persentase di Dalam Potongan Pie
+                        datalabels: {
+                            color: '#ffffff',
+                            font: { 
+                                weight: 'bold',
+                                size: 13
+                            },
+                            formatter: (value, ctx) => {
+                                let sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                if (sum === 0 || value === 0) return ''; // Jangan tampilkan angka jika 0
+                                let percentage = (value * 100 / sum).toFixed(1) + "%";
+                                return percentage;
+                            }
+                        }
                     }
                 }
             });
