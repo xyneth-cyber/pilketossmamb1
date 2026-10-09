@@ -770,7 +770,7 @@ if (totalSuara === 0) {
         const data = await res.json();
 
         // Pop-up 1: Cek respon mentah dari server
-        alert("1. Response API:\n" + JSON.stringify(data, null, 2));
+        //alert("1. Response API:\n" + JSON.stringify(data, null, 2));
 
         if (data && data.total && Array.isArray(data.total)) {
             data.total.forEach(item => {
@@ -785,7 +785,7 @@ if (totalSuara === 0) {
     }
 
     // Pop-up 2: Cek data angka yang masuk ke chart
-    alert("2. Hasil Array Chart:\n" + JSON.stringify(totalData));
+    //alert("2. Hasil Array Chart:\n" + JSON.stringify(totalData));
 
     const ctxPie = document.getElementById('chart-overall-pie').getContext('2d');
     if (pieChartInstance) pieChartInstance.destroy();
@@ -796,7 +796,7 @@ if (totalSuara === 0) {
             labels: ['Paslon 01', 'Paslon 02', 'Paslon 03'],
             datasets: [{
                 data: totalData,
-                backgroundColor: ['#2563eb', '#1e3a8a', '#e11d48'],
+                backgroundColor: ['#2563eb', '#1d4ed8', '#1e3a8a'],
                 borderWidth: 3,
                 borderColor: '#ffffff'
             }]
