@@ -1000,11 +1000,6 @@
                             <td class="p-4 font-bold text-slate-900">${row.nama}</td>
                             <td class="p-4 text-slate-700">${row.kelas}</td>
                             <td class="p-4 text-slate-600">${row.angkatan}</td>
-                            <td class="p-4 text-center">
-                                <span class="px-2.5 py-1 rounded-full text-xs font-black ${row.pilih_nomor_berapa === 1 ? 'bg-blue-100 text-mbBlue' : (row.pilih_nomor_berapa === 2 ? 'bg-blue-900 text-white' : 'bg-red-100 text-mbRed')}">
-                                    Paslon 0${row.pilih_nomor_berapa}
-                                </span>
-                            </td>
                             <td class="p-4 text-slate-500 text-[11px] font-mono">${row.waktu_pemilihan || '-'}</td>
                             <td class="p-4 text-center">
                                 <button onclick="deleteVote(${row.id}, '${row.nama}')" class="bg-rose-100 text-rose-600 hover:bg-rose-600 hover:text-white px-2.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1 mx-auto shadow-sm active:scale-95">
