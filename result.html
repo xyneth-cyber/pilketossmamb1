@@ -157,9 +157,6 @@
         // Load pie saat halaman dimuat
         window.addEventListener('DOMContentLoaded', async () => {
             loadPublicStats();
-            
-            // Refresh otomatis setiap 3 detik
-            setInterval(loadPublicStats, 3000);
         });
 
         async function loadPublicStats() {
