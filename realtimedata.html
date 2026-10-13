@@ -122,9 +122,6 @@
         window.addEventListener('DOMContentLoaded', () => {
             // Ambil data pertama kali
             loadRealtimeVoters();
-
-            // Refresh otomatis setiap 3 detik
-            setInterval(loadRealtimeVoters, 3000);
         });
 
         async function loadRealtimeVoters() {
