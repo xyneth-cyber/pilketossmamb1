@@ -151,7 +151,7 @@ export default {
         }
 
         // 1. API SIMPAN SUARA (/api/vote)
-        if (path === "/api/vote" && method === "POST") {
+        /*if (path === "/api/vote" && method === "POST") {
             try {
                 const body = await request.json().catch(() => ({}));
                 const { nama, kelas, angkatan, pilih_nomor_berapa } = body;
@@ -191,7 +191,7 @@ export default {
             } catch (err) {
                 return jsonResponse({ success: false, message: err.message }, 500);
             }
-        }
+        }*/
 
         // 2. API LOGIN ADMIN (/api/admin/login)
         if (path === "/api/admin/login" && method === "POST") {
