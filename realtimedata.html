@@ -122,6 +122,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             // Ambil data pertama kali
             loadRealtimeVoters();
+            setInterval(loadRealtimeVoters, 3000);
         });
 
         async function loadRealtimeVoters() {
